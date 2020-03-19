@@ -1,0 +1,70 @@
+{
+    "name": "oc-table",
+    "description": "Custom table with display to column filter",
+    "version": "1.0.0",
+    "jetVersion": ">=4.0.0 <5.0.0",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object"
+        },
+        "columnsDefault": {
+            "type": "object"
+        },
+        "columns": {
+            "type": "array"
+        },
+        "rootAttributes": {
+            "type": "object"
+        },
+        "selectionMode:": {
+            "type": "object"
+        },
+        "display": {
+            "type": "string"
+        },
+        "beforeCurrentRow": {
+            "type": "function"
+        },
+        "scrollPolicy": {
+            "type": "string"
+        },
+        "scrollPolicyOptions": {
+            "type": "object"
+        },
+        "editMode": {
+            "type": "string"
+        },
+        "rowTemplate": {
+            "type": "function"
+        },
+        "slot": {
+            "type": "string"
+        },
+        "pageSize": {
+            "type": "string"
+        },
+        "msgNoData": {
+            "type": "string"
+        }
+    },
+    "events": {
+        "changeFetchSize": {
+          "description": "Triggered when fetch size changed",
+          "bubbles": true,
+          "detail": {
+            "value": {
+              "description": "Obw",
+              "type": "object"
+            }
+          }
+        }
+    },
+    "slots": {
+        "greetingArea": {
+            "description": "Put your customized greeting here"
+        }
+    }
+}

@@ -1,0 +1,1 @@
+export default function(t,n){for(var r,a=2*Math.cos(2*n),e=t.length-1,o=t[e],f=0;--e>=0;)r=a*o-f+t[e],f=o,o=r;return n+r*Math.sin(2*n)};

@@ -1,0 +1,1 @@
+export default function(t,r,a){var e=t*r;return a/Math.sqrt(1-e*e)};

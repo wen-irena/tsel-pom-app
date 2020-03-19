@@ -1,0 +1,262 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+    <h3 class="oj-header-border"><b>COLLECTION DASHBOARD</b></h3>
+    <br>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+                <div class="oj-flex oj-flex-items-pad  oj-sm-flex-items-initial oj-sm-justify-content-flex-end">
+                    <div class="oj-flex-item">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item">
+                                <oj-label for="datepickercontrol1">Start Date</oj-label>
+                                <oj-input-date id="datepickercontrol1" placeholder="Choose Start Date..." value="{{collectionDashboard_startDate}}" max="[[collectionDashboard_endDate]]" converter="[[collectionDashboard_dateConverter]]" style="min-width: 150px;"> </oj-input-date>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item">
+                                <oj-label for="datepickercontrol2">End Date</oj-label>
+                                <oj-input-date id="datepickercontrol2" placeholder="Choose End Date..." value="{{collectionDashboard_endDate}}" min="[[collectionDashboard_startDate]]" converter="[[collectionDashboard_dateConverter]]" style="min-width: 150px;"> </oj-input-date>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item">
+                                <oj-label for="orderType">Order Type</oj-label>
+                                <oj-select-one id="orderType" options="{{collectionDashboard_actionLOV}}" value="{{collectionDashboard_action}}" placeholder="Select Order Type..." required="false" style="min-width: 180px;">
+                                </oj-select-one>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="oj-flex-item">
+                        <div class="oj-flex oj-flex-items-pad">
+                            <div class="oj-flex-item">
+                                <oj-label for="msisdn">MSISDN</oj-label>
+                                <oj-input-text id="msisdn" value="{{collectionDashboard_msisdn}}"></oj-input-text>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="oj-flex-item">
+                        <oj-label> </oj-label>
+                        <oj-button id="searchorder" on-oj-action='[[collectionDashboard_onSearch]]'>
+                            <i class="fas fa-search"></i>
+                        </oj-button>
+                        <oj-button id="refresh" on-oj-action='[[collectionDashboard_refreshDataAll]]'>
+                            <i class="fas fa-sync"></i>
+                        </oj-button>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <br />
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+            <div class="oj-panel" style="height:300px;">
+                <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center oj-sm-align-items-center  ">
+                    <div class="oj-flex-item">
+                        <span class="oj-icon-circle oj-icon-sm" style="margin:10px;">
+                          <span class="oj-icon-circle-inner" style="background-color:#749e5a;">
+                              <h3 style="color: white;"><b>TC</b></h3>
+                          </span>
+                        </span>
+                    </div>
+                    <div class="oj-flex-item">
+                        <i class="fas fa-long-arrow-alt-right fa-4x" style="margin:10px;"></i>
+                    </div>
+                     <div class="oj-flex-item">
+                        <div class="oj-flex oj-flex-items-pad oj-sm-justify-content-center oj-sm-align-items-center">
+                            <div class="oj-flex-item">
+                                <h3><b>BRIDGING</b></h3>
+                            </div>
+                            <div class="oj-flex-item">
+                                <div style="border-left: 1px gainsboro solid;">
+                                    <div class="oj-flex oj-flex-items-pad oj-sm-justify-content-center oj-sm-align-items-center oj-sm-justify-content-space-between">
+                                        <div class="oj-flex-item" style="min-width: 90px;">
+                                            <b>INCOMING</b>
+                                        </div>
+                                        <div class="oj-flex-item">
+                                            <div class="button-incoming" data-bind="click: onClickBridgingIncoming"><oj-bind-text value="[[amountRenderer(collectionDashboard_bridgingIncoming())]]"></oj-bind-text></div>
+                                        </div>
+                                    </div>
+                                    <div class="oj-flex oj-flex-items-pad oj-sm-justify-content-center oj-sm-align-items-center oj-sm-justify-content-space-between">
+                                        <div class="oj-flex-item" style="min-width: 90px;">
+                                            <b>SUCCESS</b>
+                                        </div>
+                                        <div class="oj-flex-item">
+                                            <div class="button-success" data-bind="click: onClickBridgingSuccess"><oj-bind-text value="[[amountRenderer(collectionDashboard_bridgingSuccess())]]"></oj-bind-text></div>
+                                        </div>
+                                    </div>
+                                    <div class="oj-flex oj-flex-items-pad oj-sm-justify-content-center oj-sm-align-items-center oj-sm-justify-content-space-between" >
+                                        <div class="oj-flex-item" style="min-width: 90px;">
+                                            <b>FAILED</b>
+                                        </div>
+                                        <div class="oj-flex-item">
+                                            <div class="button-failed" data-bind="click: onClickBridgingFailed"><oj-bind-text value="[[amountRenderer(collectionDashboard_bridgingFailed())]]"></oj-bind-text></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div class="oj-flex" style="margin:20px">
+                            <div class="oj-flex-item">
+                                <div class="oj-flex oj-flex-items-pad oj-sm-justify-content-center oj-sm-align-items-center">
+                                    <div class="oj-flex-item">
+                                        <i class="fas fa-long-arrow-alt-right fa-4x" style="margin:10px;"></i>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <h4><b>OMS</b></h4>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <div style="border-left: 1px gainsboro solid;">
+                                            <div class="oj-flex oj-flex-items-pad oj-sm-justify-content-center oj-sm-align-items-center oj-sm-justify-content-space-between">
+                                                <div class="oj-flex-item" style="min-width: 100px;">
+                                                    <b>INCOMING</b>
+                                                </div>
+                                                <div class="oj-flex-item">
+                                                    <div class="button-incoming" data-bind="click: onClickOmsIncoming"><oj-bind-text value="[[amountRenderer(collectionDashboard_omsIncoming())]]"></oj-bind-text></div>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex oj-flex-items-pad oj-sm-justify-content-center oj-sm-align-items-center oj-sm-justify-content-space-between">
+                                                <div class="oj-flex-item" style="min-width: 100px;">
+                                                    <b>SUCCESS</b>
+                                                </div>
+                                                <div class="oj-flex-item">
+                                                    <div class="button-success" data-bind="click: onClickOmsSuccess"><oj-bind-text value="[[amountRenderer(collectionDashboard_omsSuccess())]]"></oj-bind-text></div>
+                                                </div>
+                                            </div>
+                                            <div class="oj-flex oj-flex-items-pad oj-sm-justify-content-center oj-sm-align-items-center oj-sm-justify-content-space-between" >
+                                                <div class="oj-flex-item" style="min-width: 100px;">
+                                                    <b>FAILED</b>
+                                                </div>
+                                                <div class="oj-flex-item">
+                                                    <div class="button-failed" data-bind="click: onClickOmsFailed"><oj-bind-text value="[[amountRenderer(collectionDashboard_omsFailed())]]"></oj-bind-text></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-flex" style="margin:20px">
+                            <div class="oj-flex-item">
+                                    <div class="oj-flex oj-flex-items-pad oj-sm-justify-content-center oj-sm-align-items-center">
+                                        <div class="oj-flex-item">
+                                            <i class="fas fa-long-arrow-alt-right fa-4x" style="margin:10px;"></i>
+                                        </div>
+                                        <div class="oj-flex-item">
+                                            <h4><b>PRO</b></h4>
+                                        </div>
+                                        <div class="oj-flex-item">
+                                            <div style="border-left: 1px gainsboro solid;">
+                                                <div class="oj-flex oj-flex-items-pad oj-sm-justify-content-center oj-sm-align-items-center oj-sm-justify-content-space-between">
+                                                    <div class="oj-flex-item" style="min-width: 100px;">
+                                                        <b>INCOMING</b>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <div class="button-incoming" data-bind="click: onClickProIncoming"><oj-bind-text value="[[amountRenderer(collectionDashboard_proIncoming())]]"></oj-bind-text></div>
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex oj-flex-items-pad oj-sm-justify-content-center oj-sm-align-items-center oj-sm-justify-content-space-between">
+                                                    <div class="oj-flex-item" style="min-width: 100px;">
+                                                        <b>SUCCESS</b>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <div class="button-success" data-bind="click: onClickProSuccess"><oj-bind-text value="[[amountRenderer(collectionDashboard_proSuccess())]]"></oj-bind-text></div>
+                                                    </div>
+                                                </div>
+                                                <div class="oj-flex oj-flex-items-pad oj-sm-justify-content-center oj-sm-align-items-center oj-sm-justify-content-space-between" >
+                                                    <div class="oj-flex-item" style="min-width: 100px;">
+                                                        <b>FAILED</b>
+                                                    </div>
+                                                    <div class="oj-flex-item">
+                                                        <div class="button-failed" data-bind="click: onClickProFailed"><oj-bind-text value="[[amountRenderer(collectionDashboard_proFailed())]]"></oj-bind-text></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+     <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+            <div class="oj-panel">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <h4><b>Daily Collection Order SLA Performance</b></h4>
+                    </div>
+                    <div class="oj-flex-item" align="right">
+                        <oj-button id="refresh" on-oj-action='[[collectionDashboard_refreshDataAll]]'>
+                            <i class="fas fa-sync"></i>
+                        </oj-button>
+                    </div>
+                </div>
+                <hr>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-chart id="chart1" type="combo" series="[[mixedSeriesValue]]" groups="[[mixedGroupsValue]]" animation-on-display="auto" animation-on-data-change="auto" time-axis-type="mixedFrequency" orientation="[[orientationValue]]" selection-mode="single" selection="{{selectedItemsValue}}"
+                            on-selection-changed="[[selectionListener]]" x-axis="[[xAxisOptions]]" y-axis.title="Total Order Count" y-axis.tick-label.scaling="none" value-formats.y.scaling="none"
+                            legend.rendered="off" style="width:100%;height:200px;float:right;" style-defaults="[[styleDefaults]]">
+                        </oj-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="oj-flex oj-flex-items-pad oj-sm-hide oj-md-hide oj-lg-hide oj-xl-hide" id='servicemonitoring_detail'>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6 oj-xl-6">
+            <div class="oj-panel" style="height:450px">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <h4><b>Hourly Collection Order Performance</b></h4>
+                    </div>
+                    <div class="oj-flex-item" align="right">
+                        <oj-button id="refresh" on-oj-action='[[collectionDashboard_refreshDataAll]]'>
+                            <i class="fas fa-sync"></i>
+                        </oj-button>
+                    </div>
+                </div>
+                <hr>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-chart id="chart1" type="combo" series="[[mixedSeriesValueHourly]]" groups="[[mixedGroupsValueHourly]]" time-axis-type="mixedFrequency" orientation="[[orientationValue]]" selection-mode="single" x-axis="[[xAxisOptions2]]" y-axis.title="Total Order Count"
+                            y-axis.tick-label.scaling="none" value-formats.y.scaling="none" legend.rendered="off" style-defaults="[[styleDefaults2]]"
+                            style="width:100%;height:200px;float:right;">
+                        </oj-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6 oj-xl-6">
+            <div class="oj-panel" style="height:450px">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <h4><b>Top Order Type</b></h4>
+                    </div>
+                    <div class="oj-flex-item" align="right">
+                        <oj-button id="refresh" on-oj-action='[[collectionDashboard_refreshDataAll]]'>
+                            <i class="fas fa-sync"></i>
+                        </oj-button>
+                    </div>
+                </div>
+                <hr>
+                <oc-table id="dashboardTable" columns="[[collectionDashboard_columns]]" data="[[collectionDashboard_datasource]]" display="[[collectionDashboard_display]]" columns-default="[[collectionDashboard_columnsDefault]]" scroll-policy="[[collectionDashboard_scrollPolicy]]" scroll-policy-options="[[collectionDashboard_scrollPolicyOptions]]"
+                    root-attributes="[[collectionDashboard_rootAttributes]]" slot="colDisp pagination">
+                </oc-table>
+            </div>
+        </div>
+    </div>
+</div>

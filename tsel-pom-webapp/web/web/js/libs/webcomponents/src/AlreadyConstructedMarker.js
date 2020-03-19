@@ -1,0 +1,1 @@
+class AlreadyConstructedMarker{}export default new AlreadyConstructedMarker;

@@ -1,0 +1,1 @@
+import{HALF_PI}from"../constants/values";export default function(r,t,I){if(Math.abs(t)>HALF_PI)return Number.NaN;if(t===HALF_PI)return Number.POSITIVE_INFINITY;if(t===-1*HALF_PI)return Number.NEGATIVE_INFINITY;var a=r*I;return Math.log(Math.tan((HALF_PI+t)/2))+r*Math.log((1-a)/(1+a))/2};

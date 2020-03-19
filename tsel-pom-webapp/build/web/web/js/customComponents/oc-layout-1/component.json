@@ -1,0 +1,32 @@
+{
+    "name": "oc-table",
+    "description": "Custom table with display to column filter",
+    "version": "1.0.0",
+    "jetVersion": ">=4.0.0 <5.0.0",
+    "properties": {
+        "hasSearchCriteria": {
+            "type": "boolean"
+        },
+        "hasBreadCrumb": {
+            "type": "boolean"
+        }
+    },
+    "slots" : {
+        "searchCriteriaArea":{
+          "description" : "Search Criteria Area"
+        },
+        "tableArea":{
+            "description" : "Search Criteria Area"
+        },
+        "pageTitleArea":{
+            "description" : "Page Title Area"
+        },
+        "breadCrumbArea":{
+            "description" : "Page BreadCrumb Area"
+        },
+        "dialogArea":{
+            "description" : "Dialog Area"
+        }
+        
+      }
+}

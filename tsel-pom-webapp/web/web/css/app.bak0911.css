@@ -1,0 +1,137 @@
+/*
+    Document   : Hendry Y
+    Created on : 07-AUG-2018
+    Author     : Oracle Consulting ID
+    Description:
+        This is where any of your application specific styles should be included
+*/
+/* Header  */
+html:not([dir="rtl"]) .telkomsel-icon {
+    padding-right: 4px;
+}
+.telkomsel-icon:before {
+    display: inline;
+}
+.telkomsel-icon:before {
+    content: " ";
+    background-image: url(images/telkomsel_logo.png);
+    width: 100px;
+    height: 35px;
+    background-position: 0;
+    background-size: 100px 35px;
+    position: absolute;
+    background-repeat: no-repeat;
+    left: 60px;
+    top: 5px;
+}
+.telkomsel-icon {
+    width: 100px;
+}
+
+
+/* Buttons full chrome - hover*/
+.oj-button.oj-hover.oj-button-full-chrome .oj-button-icon,
+.oj-button.oj-hover.oj-button-full-chrome.oj-selected .oj-button-icon,
+.oj-button.oj-hover.oj-button-full-chrome .oj-button-text,
+.oj-button.oj-hover.oj-button-full-chrome.oj-selected .oj-button-text{
+    color:#fff;
+}
+.oj-button.oj-hover.oj-button-full-chrome .oj-button-label,
+.oj-button.oj-hover.oj-button-full-chrome.oj-selected .oj-button-label,
+.oj-button.oj-hover.oj-button-full-chrome.oj-selected.oj-focus .oj-button-label,
+.oj-button.oj-selected.oj-button-full-chrome .oj-button-button{
+    background-color:#e5131c;
+}
+.oj-button.oj-hover.oj-button-full-chrome.oj-selected.oj-focus .oj-button-button{
+    border: 1.5px solid #e5131c;
+}
+/* END Buttons full chrome*/
+
+/* Buttons full chrome - reversed*/
+/*.oj-button.oj-button-full-chrome .oj-button-icon,
+.oj-button.oj-button-full-chrome .oj-button-text,
+.oj-button.oj-button-full-chrome .oj-button-text{
+    color:#fff;
+}
+.oj-button.oj-button-full-chrome .oj-button-label{
+    background-color:#e5131c;
+}
+.oj-button.oj-button-full-chrome.oj-focus .oj-button-button{
+    border: 1.5px solid #e5131c;
+}
+
+.oj-button.oj-disabled.oj-button-full-chrome{
+    background-color: #f4f6f7;
+    background-image: none;
+    border-color: #e0e6eb;
+    color: #9e9e9e;
+    box-shadow: none;
+}*/
+/* END Buttons full chrome*/
+
+/* Buttons half chrome*/
+.oj-button.oj-hover.oj-button-half-chrome .oj-button-icon,
+.oj-button.oj-hover.oj-button-half-chrome .oj-button-text,
+.oj-button.oj-hover.oj-button-half-chrome.oj-selected .oj-button-icon,
+.oj-button.oj-hover.oj-button-half-chrome.oj-selected .oj-button-text{
+    color:#fff;
+}
+.oj-button.oj-hover.oj-button-half-chrome .oj-button-label,
+.oj-button.oj-hover.oj-button-half-chrome.oj-selected .oj-button-label,
+.oj-button.oj-hover.oj-button-half-chrome.oj-selected.oj-focus .oj-button-label,
+.oj-button.oj-selected.oj-button-half-chrome .oj-button-button{
+    background-color:#e5131c;
+}
+.oj-button.oj-hover.oj-button-half-chrome.oj-selected.oj-focus .oj-button-button{
+    border: 1.5px solid #e5131c;
+}
+/* Buttons half chrome*/
+
+/*Table reversed*/
+/*.oj-table-grid-display .oj-table-header {
+    background-color:#e5131c;
+    color:#fff;
+}
+
+.oj-table-header-cell .oj-hover {
+    background-color:#e5131c;
+    color:#fff;
+}
+
+.oj-table-element:not(.oj-table-column-header-resizing) .oj-table-data-cell.oj-selected {
+    background-color: #cecece7a;
+}*/
+
+.oj-label, .oj-label-nocomp {
+    color:#000000;
+}
+
+/*h1, h2, h3, h4, h5 {
+    font-weight: bold
+}*/
+
+/* END Header  */
+/* Navigation drawer */
+.oj-navigationlist-item.oj-selected{
+    border-color: #e5131c;
+}
+.oj-contrast-marker .oj-navigationlist-item.oj-hover:not(.oj-selected){
+    border-color: #f2f2f3;
+}
+/*END Navigation drawer */
+
+
+.oj-panel-alt1{
+    background-color:#fff;
+}
+
+.pull-right{
+    float:right;
+}
+
+
+/* Code Mirror */
+.CodeMirror { height: auto; border: 1px solid #ddd; }
+/*.CodeMirror-scroll { max-height: 250px; }*/
+.CodeMirror pre { padding-left: 7px; line-height: 1.25; }
+/* END Code Mirror */

@@ -1,0 +1,1 @@
+define(["./impl/pouchDBPersistenceStore"],function(e){"use strict";return function(){function n(n,r){var t=new e(n);return t.Init(r).then(function(){return Promise.resolve(t)})}return{createPersistenceStore:function(e,r){return n(e,r)}}}()});

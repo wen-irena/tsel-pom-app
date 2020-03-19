@@ -1,0 +1,1 @@
+import sinh from"./sinh";import cosh from"./cosh";export default function(o,h,r){for(var t,n,s=Math.sin(h),i=Math.cos(h),c=sinh(r),f=cosh(r),a=2*i*f,e=-2*s*c,m=o.length-1,p=o[m],u=0,l=0,M=0;--m>=0;)t=l,n=u,p=a*(l=p)-t-e*(u=M)+o[m],M=e*l-n+a*u;return[(a=s*f)*p-(e=i*c)*M,a*M+e*p]};

@@ -1,0 +1,70 @@
+
+
+<oj-input-text disabled="true" label-hint="[[props.labelHint]]" autocomplete="off"
+               value="[[props.displayValue]]" data-bind="attr: {id: 'valueDlg_'+ $properties.id}, visible: required"></oj-input-text>
+<div style="vertical-align: top;display: inline-flex;align:top">
+<oj-button display='icons' on-oj-action='[[onOpenDialog]]' disabled="false"  data-bind="attr: {id: 'openDlgBtn_'+$properties.id}">
+    <span slot='startIcon' style="vertical-align: top" class="oj-fwk-icon oj-fwk-icon-magnifier"></span>
+</oj-button>
+</div>
+
+
+
+<oj-dialog style="display:none;width:60%;height:auto !important;max-height: calc(200vh - 340px) !important;" data-bind="attr: {id: 'dlgModal_'+$properties.id , title: $properties.dialogName }">
+    <div class="oj-dialog-body">
+        <div id="CounterPartyPopUp">
+            <oj-bind-if value="[[hasFilter]]">
+                <div class="oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1"> 
+<!--                    <oj-validation-group id="tracker" valid="{{groupValid}}">-->
+                        <oj-form-layout id="ofl1" label-edge="start" max-columns="{{maxColumns}}">
+                            <!-- ko foreach: props.dialogQueryParams -->
+                            <!--<oj-bind-if test="true">-->
+
+                            <oj-bind-if test="[[visible === true]]">
+                                <oj-input-text label-hint="[[paramLabel]]" data-bind="attr: {id: 'input_'+$properties.id+'_'+paramName}" value="{{value}}" ></oj-input-text>
+                            </oj-bind-if>
+                            <!-- /ko -->
+
+
+                        </oj-form-layout>
+                        <!--</oj-validator-group>-->
+
+                        <!--</div>-->
+                </div>
+                <!--<div class="oj-flex oj-lg-flex-items-1 pull-right">-->                      
+                <!--<div class="oj-flex-item">-->
+                <!--<div class="page-button-wrapper">-->
+                <oj-button on-oj-action='[[onClickSearch]]' data-bind="attr: {id: 'searchDlgBtn_'+$properties.id}" style="float:right;margin-bottom: 25px;">Search</oj-button>
+                <oj-button on-oj-action='[[onClickReset]]' data-bind="attr: {id: 'resetDlgBtn_'+$properties.id}"style="float:right;margin-bottom: 25px;">Reset</oj-button>
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+            </oj-bind-if>
+
+            <table class="myPrint" data-bind="attr: {id: 'dlgTbl_'+$properties.id}, ojComponent: dialogTableOptions" ></table>
+            <oj-paging-control id="paging" data='[[dlgDataSource]]' page-size='5' slot='bottom'>
+            </oj-paging-control>
+            <div class="oj-flex oj-lg-flex-items-1 pull-right">                      
+                <div class="oj-flex-item">
+                    <div class="page-button-wrapper">
+                        <oj-button on-oj-action='[[onClickSelectAndClose]]' data-bind="attr: {id: 'selectDlgBtn_'+$properties.id}" style="float: right">Select</oj-button>
+                        <oj-button  on-oj-action='[[onClickCancel]]' data-bind="attr: {id: 'cancelDlgBtn_'+$properties.id}"style="float: right">Cancel</oj-button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</oj-dialog>
+<!--<script type="text/html" id="view_action_hdr">
+    <th style="padding: 0px; text-align:center;">
+        Action
+    </th>
+</script>
+<script type="text/html" id="view_action">
+    <td>
+        <button id= "btn_PI" style="margin: 0px;"
+            data-bind="click: $parent.onDialogSelectTable, ojComponent: { component: 'ojButton', label: 'Select'}">
+        </button>
+    </td>
+</script>-->

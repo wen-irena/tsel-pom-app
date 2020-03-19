@@ -1,0 +1,154 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+-->
+<oc-layout-1 id="layoutOrder" has-search-criteria="true" has-bread-crumb="true">
+    <span slot="pageTitleArea">Fallout</span>
+    <oj-bind-if Test="[[dialogFlag() === 'Y']]">
+        <div slot="breadCrumbArea">
+            <a href="javascript:void(0)" data-bind="click:fallout_backorder.bind(fallout_paramorderId)">Order (<span data-bind="text:fallout_paramorderId"></span>)</a>
+            <span>></span>
+            <a href="javascript:void(0)" data-bind="click:fallout_backtask.bind(fallout_paramorderId)">Tasks (<span data-bind="text:fallout_paramorderId"></span>)</a>
+            <span>></span>
+            <span>Fallout</span>
+        </div>
+    </oj-bind-if>
+    <div class="oj-flex-item" slot="searchCriteriaArea">
+        <oj-form-layout label-edge="start" id="form-container" id="form-container" class="oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div id="searchAttribute" data-oj-context class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-2 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="falloutId" style="text-align:left">Fallout Id</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="falloutId" name="falloutId" placeholder="Fallout id" value="{{fallout_searchfoId}}"></oj-input-text>
+                    </div>
+                </div>
+
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="falloutDate" style="text-align:left">Fallout Date</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-date-time id="falloutDate" name="fallout Date" placeholder="Start Date" value="{{FromfalloutDate}}" max="[[toFalloutDate]]">
+                        </oj-input-date-time>
+                        to
+                        <oj-input-date-time id="toFalloutDate" placeholder="End Date" value="{{toFalloutDate}}" min="[[FromfalloutDate]]"> </oj-input-date-time>
+                    </div>
+                </div>
+
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchStatus" style="text-align:left">Status</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-select-one id="searchStatus" options="{{fallout_falloutStatusLOV}}" value="{{fallout_searchStatus}}" placeholder="Select Status..." required="false">
+                        </oj-select-one>
+                    </div>
+                </div>
+
+                <oj-bind-if Test="[[dialogFlag() === 'N']]">
+
+                    <div id="orderId" class="oj-flex">
+                        <div class="oj-flex-item">
+                            <oj-label for="dialog2" style="text-align:left">Order Id</oj-label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <oj-input-text class="oj-inputtext-input-disabled" valid="{{selectedOrderIdValid}}" onkeydown="return false" value="{{selectedOrderId}}" label-hint="Order Id" autocomplete="off" id="ordIdInptTxt"></oj-input-text>
+                            <oc-dialog id="dialog2" init-table-on-load="false" dialog-table-columns="[[orders_columns]]" dialog-query-params="[[dialog_query_params]]" dialog-table-primary-key="orderId" on-select-dialog="[[dialog_output_listener]]" display-value="[[selectedOrderId]]"
+                                value="[[selectedOrderId]]" service-url="[[serviceUrl]]" required="true" dialog-name="Order Dialog" label-hint="Order Type">
+                            </oc-dialog>
+                        </div>
+
+                        <!--                     <oj-bind-if test="[[passedParam.Action === N]]">-->
+                        <!--<div class="oj-flex-item">
+                            <oj-label for="dialog3" style="text-align:left" >Action Id</oj-label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <oj-input-text 
+                                           class ="oj-inputtext-input-disabled"
+                                           valid ="{{actionIdValid}}" onkeydown ="return false"
+                                           value="{{actionId}}" label-hint="Action Id" autocomplete="off" id ="actIdInptTxt"></oj-input-text>
+                            <oc-dialog id="dialog3" 
+                                       init-table-on-load="false" 
+                                       dialog-table-columns="[[action_columns]]"
+                                       dialog-query-params="[[dialog_query_params2]]"
+                                       dialog-table-primary-key="actId"
+                                       on-select-dialog="[[dialog_output_listener2]]"
+                                       display-value="[[actionId]]"
+                                       value="[[actionId]]"
+                                       required ="true"
+                                       service-url="[[serviceUrlAction]]" 
+                                       dialog-name="Order Dialog"
+                                       label-hint="Order Type">
+                            </oc-dialog>
+                        </div>-->
+                    </div>
+
+                </oj-bind-if>
+            </div>
+
+        </oj-form-layout>
+        <oj-form-layout label-edge="start" id="form-container" max-columns="2">
+            <div class="oj-flex-item">
+                <oj-button slot="value" on-oj-action="[[fallout_onReset]]">Reset</oj-button>
+                <oj-button slot="value" on-oj-action="[[fallout_onSearch]]">Search</oj-button>
+            </div>
+        </oj-form-layout>
+    </div>
+
+    <div slot="tableArea">
+
+        <!--        <oj-button id="viewFalloutDetails" on-oj-action='[[viewFalloutDetails]]' disabled="{{!fallout_selectedRow()}}">
+                    View Fallout Details
+                </oj-button>
+                <oj-button id="payloadBtn" on-oj-action='[[orders_viewPayload]]' disabled="{{!orders_selectedRow()}}">
+                    View Payload
+                </oj-button>
+                <oj-button id="rollbackBtn" on-oj-action='[[orders_cancelOrder]]' disabled="{{!orders_selectedRow()}}">
+                    Cancel Order
+                </oj-button>-->
+        <oc-table id="ordersTable" columns="[[fallout_columns]]" data="[[fallout_datasource]]" display="[[fallout_display]]" columns-default="[[fallout_columnsDefault]]" scroll-policy="[[fallout_scrollPolicy]]" scroll-policy-options="[[fallout_scrollPolicyOptions]]"
+            root-attributes="[[fallout_rootAttributes]]" before-current-row="{{fallout_onSelectRow}}" slot="colDisp pagination">
+            <span slot="fetchSizeArea">
+                <span>Fetch Size: </span>
+            <oj-select-one id="basicSelect" value="{{fallout_fetchSize}}" on-value-changed="[[fallout_refreshData]]" style="max-width:1.3em">
+                <oj-option value="-1">All</oj-option>
+                <oj-option value="10">10</oj-option>
+                <oj-option value="25">25</oj-option>
+                <oj-option value="50">50</oj-option>
+            </oj-select-one>
+            </span>
+        </oc-table>
+
+    </div>
+
+</oc-layout-1>
+
+
+<script type="text/html" id="foId">
+    <td>
+        <a title="View Fallout Details" href="javascript:void(0)" id="actionlink" data-bind="text: [[foId]], click:viewFalloutDetails.bind($data)"></a>
+    </td>
+</script>
+
+<script type="text/html" id="fallout-audit-template">
+    <td>
+        <div>
+            <b>Created By :</b>
+            <oj-bind-text value="[[createdBy]]"></oj-bind-text>
+        </div>
+        <div>
+            <b>Last Updated By :</b>
+            <oj-bind-text value="[[updatedBy]]"></oj-bind-text>
+        </div>
+        <div>
+            <b>Created Date :</b>
+            <oj-bind-text value="{{fallout_dateTimeRenderer2(createdDate)}}"></oj-bind-text>
+        </div>
+        <div>
+            <b>Updated Date :</b>
+            <oj-bind-text value="{{fallout_dateTimeRenderer2(updatedDate)}}"></oj-bind-text>
+        </div>
+    </td>
+</script>

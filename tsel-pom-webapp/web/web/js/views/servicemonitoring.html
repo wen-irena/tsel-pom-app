@@ -1,0 +1,283 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+    <h3 class="oj-header-border"><b>SERVICE MONITORING</b></h3>
+    <br>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+            <div class="oj-panel">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <h4><b>Daily Order SLA Performance</b></h4>
+                    </div>
+                    <div class="oj-flex-item" align="right">
+                        <oj-select-one id="filterBySelect" value="{{serviceMonitoring_selectedFilter}}" style="max-width:8em">
+                            <oj-option value="all">All</oj-option>
+                            <oj-option value="online">Online</oj-option>
+                            <oj-option value="batch">Batch</oj-option>
+                        </oj-select-one>
+                        <oj-input-date id="datepickercontrol1" placeholder="Choose Start Date..." value="{{serviceMonitoring_startDate}}" max="[[serviceMonitoring_endDate]]" converter="[[serviceMonitoring_dateConverter]]"> </oj-input-date>
+                        <oj-input-date id="datepickercontrol2" placeholder="Choose End Date..." value="{{serviceMonitoring_endDate}}" min="[[serviceMonitoring_startDate]]" max="[[serviceMonitoring_currentDate]]" converter="[[serviceMonitoring_dateConverter]]"> </oj-input-date>
+                        <oj-button id="searchorder" on-oj-action='[[serviceMonitoring_onSearch]]'>
+                            <i class="fas fa-search"></i>
+                        </oj-button>
+                        <!--<oj-button id="refresh" on-oj-action='[[serviceMonitoring_onSearch]]'>
+                            <i class="fas fa-sync"></i>
+                        </oj-button>-->
+                    </div>
+                </div>
+                <hr>
+                <div class="oj-flex oj-margin-lg-top">
+                    <div class="oj-flex-item">
+                        <oj-chart id="chart1" 
+                                  type="combo" 
+                                  series="[[mixedSeriesValue]]" 
+                                  groups="[[mixedGroupsValue]]" 
+                                  data-label="[[serviceMonitoring_dailyLabel]]"
+                                  animation-on-display="auto" 
+                                  animation-on-data-change="auto" 
+                                  orientation="[[orientationValue]]" 
+                                  selection-mode="single" 
+                                  selection="{{selectedItemsValue}}"
+                                  hide-and-show-behavior="withRescale"
+                                  stack="[[stackValue]]"
+                                  time-axis-type="enabled"
+                                  on-selection-changed="[[serviceMonitoring_selectionListener]]" 
+                                  y-axis.title="Total Order Count" 
+                                  y2-axis.min="0" 
+                                  y2-axis.max="1" 
+                                  y2-axis.tick-label.converter="[[y2Converter]]" 
+                                  y-axis.tick-label.converter="[[yConverter]]" 
+                                  y-axis.tick-label.scaling="none"
+                                  y2-axis.align-tick-marks="off" 
+                                  y2-axis.major-tick.rendered="off" 
+                                  y2-axis.title="% <= 5 minutes"
+                                  legend.position="bottom" 
+                                  value-formats.y2.converter="[[y2Converter2]]"
+                                  value-formats.y.converter="[[yConverter]]"
+                                  value-formats.y.scaling="none"
+                                  style="width:100%;height:350px;float:right;" 
+                                  style-defaults.bar-gap-ratio="0.35"
+                                  style-defaults.marker-displayed="on"
+                                  style-defaults.data-label-position="[[serviceMonitoring_dataLabelPositionValue]]">
+                        </oj-chart>
+                    </div>
+                </div>
+                <div class="oj-flex oj-sm-align-items-flex-end">
+                    <div class="oj-flex-item" align="left">
+                        <oj-buttonset-one value="{{stackValue}}" chroming="outlined" display='icons'>
+                            <oj-option value="on">
+                                <span slot='startIcon' class="demo-csc-bar-stack"></span>
+                                Stack
+                            </oj-option>
+                            <oj-option value="off">
+                                <span slot='startIcon' class="demo-csc-bar-unstack"></span>
+                                Unstack
+                            </oj-option>
+                        </oj-buttonset-one>
+                        <oj-checkboxset id="checkboxSetDataLabel" 
+                                        labelled-by="dataLabel"
+                                        value="{{serviceMonitoring_loadDataLabelValue}}"
+                                        style="padding-left:30px;">
+                          <oj-option id="yes" value="yes">Display Data Label</oj-option>
+                        </oj-checkboxset>
+                        <oj-checkboxset id="checkboxSetAgreeId" 
+                                        labelled-by="agreeId"
+                                        value="{{serviceMonitoring_loadDetailValue}}"
+                                        style="padding-left:30px;">
+                          <oj-option id="agree" value="all">Load All Detail</oj-option>
+                        </oj-checkboxset>
+                    </div>
+                    <div class="oj-flex-item oj-padding" align="right">
+                        <span class="oj-text-xs"><b>Last Refresh Time: <oj-bind-text value="[[serviceMonitoring_dateTimeRenderer(serviceMonitoring_lastRefreshDaily())]]"></oj-bind-text></b></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="oj-sm-hide oj-md-hide oj-lg-hide oj-xl-hide" id="serviceMonitoring_detail" >
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item">
+                <h3 class="oj-header-border"><b>Selected Date : <oj-bind-text value="[[serviceMonitoring_dateRenderer(dashboardSelectedDate())]]"></oj-bind-text></b></h3>
+            </div>
+        </div>
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6 oj-xl-6">
+                <div id="hourly-panel" class="oj-panel" style="height:430px">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-sm-flex-0" align="left">
+                            <oj-button id="hourly"  chroming="half" display='icons'
+                                on-oj-action='[[serviceMonitoring_onExpandAndCollapse]]'>
+                                <i slot="endIcon" id="hourly-icon" class="oj-panel-collapse-icon"></i>
+                            </oj-button>
+                        </div>
+                        <div class="oj-flex-item oj-padding-horizontal">
+                            <h4><b>Hourly Order Performance</b></h4>
+                        </div>
+                        <div class="oj-flex-item" align="right">
+                            <oj-button id="refresh" on-oj-action='[[serviceMonitoring_onRefreshHourly]]'>
+                                <i class="fas fa-sync"></i>
+                            </oj-button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="oj-flex oj-sm-flex-direction-column" id="hourly-content">
+                        <div class="oj-flex-item oj-margin-lg-top oj-padding-top oj-padding-bottom">
+                            <oj-chart id="chart2"
+                                      type="combo"
+                                      series="[[mixedSeriesValueHourly]]"
+                                      groups="[[mixedGroupsValueHourly]]"
+                                      animation-on-display="auto" 
+                                      animation-on-data-change="auto" 
+                                      time-axis-type="enabled"
+                                      orientation="[[orientationValue]]"
+                                      hide-and-show-behavior="withRescale"
+                                      x-axis="[[xAxisOptions2]]"
+                                      y-axis.title="Total Order Count"
+                                      y-axis.tick-label.scaling="none"
+                                      y2-axis.min="0"
+                                      y2-axis.max="1"
+                                      y2-axis.tick-label.converter="[[y2Converter]]"
+                                      y2-axis.align-tick-marks="off"
+                                      y2-axis.major-tick.rendered="off"
+                                      y2-axis.title="%"
+                                      value-formats.y2.converter="[[y2Converter2]]"
+                                      value-formats.y.converter="[[yConverter]]"
+                                      value-formats.y.scaling="none"
+                                      value-formats.group.tooltip-label="Hour"
+                                      legend.position="bottom" 
+                                      style-defaults="[[styleDefaults]]"
+                                style="width:100%;height:250px;float:right;">
+                            </oj-chart>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="oj-flex-item oj-sm-align-self-flex-end" align="right" style="padding-top: 8px;">
+                            <span class="oj-text-xs"><b>Last Refresh Time: <oj-bind-text value="[[serviceMonitoring_dateTimeRenderer(serviceMonitoring_lastRefreshHourly())]]"></oj-bind-text></b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6 oj-xl-6">
+                <div id="hourlyP90-panel" class="oj-panel" style="height:430px">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-sm-flex-0" align="left">
+                            <oj-button id="hourlyP90"  chroming="half" display='icons'
+                                on-oj-action='[[serviceMonitoring_onExpandAndCollapse]]'>
+                                <i slot="endIcon" id="hourly-icon" class="oj-panel-collapse-icon"></i>
+                            </oj-button>
+                        </div>
+                        <div class="oj-flex-item oj-padding-horizontal">
+                            <h4><b>P90/P99 Chart</b></h4>
+                        </div>
+                        <div class="oj-flex-item" align="right">
+                            <oj-select-one id="percentileSelect" value="{{serviceMonitoring_selectedPercentile}}" style="max-width:8em">
+                                <oj-option value="0.9">P90</oj-option>
+                                <oj-option value="0.99">P99</oj-option>
+                            </oj-select-one>
+                            <oj-button id="refresh2" on-oj-action='[[serviceMonitoring_onRefreshHourlyP90]]'>
+                                <i class="fas fa-sync"></i>
+                            </oj-button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="oj-flex oj-sm-flex-direction-column" id="hourlyP90-content">
+                        <div class="oj-flex-item oj-margin-lg-top oj-padding-top oj-padding-bottom">
+                            <oj-chart id="chart3"
+                                      type="combo"
+                                      series="[[mixedSeriesValueHourlyP90]]"
+                                      groups="[[mixedGroupsValueHourlyP90]]"
+                                      animation-on-display="auto" 
+                                      animation-on-data-change="auto" 
+                                      time-axis-type="enabled"
+                                      orientation="[[orientationValue]]"
+                                      hide-and-show-behavior="withRescale"
+                                      x-axis="[[xAxisOptions2]]"
+                                      y-axis.title="Percentile"
+                                      y-axis.tick-label.scaling="none"
+                                      value-formats.y.converter="[[yConverterP90]]"
+                                      value-formats.y.scaling="none"
+                                      legend.position="bottom" 
+                                      style-defaults="[[styleDefaults]]"
+                                style="width:100%;height:250px;float:right;">
+                            </oj-chart>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="oj-flex-item oj-sm-align-self-flex-end" align="right" style="padding-top: 8px;">
+                            <span class="oj-text-xs"><b>Last Refresh Time: <oj-bind-text value="[[serviceMonitoring_dateTimeRenderer(serviceMonitoring_lastRefreshHourlyP90())]]"></oj-bind-text></b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6 oj-xl-6">
+                <div id="orderType-panel" class="oj-panel" style="height:430px">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-sm-flex-0">
+                            <oj-button id="orderType" chroming="half" display='icons'
+                                on-oj-action='[[serviceMonitoring_onExpandAndCollapse]]'>
+                                <i slot="endIcon" id="orderType-icon" class="oj-panel-collapse-icon"></i>
+                            </oj-button>
+                        </div>
+                        <div class="oj-flex-item oj-padding-horizontal">
+                            <h4><b>By Order Type</b></h4>
+                        </div>
+                        <div class="oj-flex-item" align="right">
+                            <oj-button id="refresh" on-oj-action='[[serviceMonitoring_onRefreshOrderType]]'>
+                                <i class="fas fa-sync"></i>
+                            </oj-button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="oj-flex oj-sm-flex-direction-column  oj-sm-flex-wrap-nowrap" id="orderType-content">
+                        <div class="oj-flex-item oj-padding-lg-bottom">
+                            <oc-table id="orderTypeTable" columns="[[serviceMonitoring_columns]]" data="[[serviceMonitoring_datasource]]" display="[[serviceMonitoring_display]]" columns-default="[[serviceMonitoring_columnsDefault]]" scroll-policy="[[serviceMonitoring_scrollPolicy]]" scroll-policy-options="[[serviceMonitoring_scrollPolicyOptions]]"
+                                root-attributes="[[serviceMonitoring_rootAttributes]]" slot="colDisp pagination">
+                            </oc-table>
+                        </div>
+                        <div class="oj-flex-item oj-sm-align-self-flex-end">
+                            <span class="oj-text-xs" align="right"><b>Last Refresh Time: <oj-bind-text value="[[serviceMonitoring_dateTimeRenderer(serviceMonitoring_lastRefreshOrderType())]]"></oj-bind-text></b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-6 oj-xl-6">
+                <div id="salesChannel-panel" class="oj-panel" style="height:430px">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item oj-sm-flex-0">
+                            <oj-button id="salesChannel" chroming="half" display='icons'
+                                on-oj-action='[[serviceMonitoring_onExpandAndCollapse]]'>
+                                <i slot="endIcon" id="salesChannel-icon" class="oj-panel-collapse-icon"></i>
+                            </oj-button>
+                        </div>
+                        <div class="oj-flex-item oj-padding-horizontal">
+                            <h4><b>By Sales Channel</b></h4>
+                        </div>
+                        <div class="oj-flex-item" align="right">
+                            <oj-button id="refresh" on-oj-action='[[serviceMonitoring_onRefreshSalesChannel]]'>
+                                <i class="fas fa-sync"></i>
+                            </oj-button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="oj-flex oj-sm-flex-direction-column  oj-sm-flex-wrap-nowrap"  id="salesChannel-content">
+                        <div class="oj-flex-item oj-padding-lg-bottom">
+                           <oc-table id="salesChannelTable" columns="[[dashboardTopSales_columns]]" data="[[dashboardTopSales_datasource]]" display="[[serviceMonitoring_display]]" columns-default="[[serviceMonitoring_columnsDefault]]" scroll-policy="[[serviceMonitoring_scrollPolicy]]" scroll-policy-options="[[serviceMonitoring_scrollPolicyOptions]]" 
+                               root-attributes="[[serviceMonitoring_rootAttributes]]" slot="colDisp pagination">
+                           </oc-table>
+                        </div>
+                        <div class="oj-flex-item oj-sm-align-self-flex-end" align="right">
+                            <span class="oj-text-xs"><b>Last Refresh Time: <oj-bind-text value="[[serviceMonitoring_dateTimeRenderer(serviceMonitoring_lastRefreshSalesChannel())]]"></oj-bind-text></b></span>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

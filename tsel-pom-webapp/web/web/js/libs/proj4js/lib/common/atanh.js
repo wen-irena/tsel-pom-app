@@ -1,0 +1,1 @@
+export default function(t){return Math.log((t-1)/(t+1))/2};

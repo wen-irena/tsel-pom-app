@@ -1,0 +1,92 @@
+/* This is to prevent the flash of unstyled content before the composite properties have been setup. */
+
+las-table:not(.oj-complete) {
+  visibility: hidden;
+}
+
+.dropBtnBar {
+   position: relative;
+    display: inline-block;
+    float: right;
+    padding-bottom: 15px;
+}
+.dropBtnBar .oj-button {     
+/*    background-color: #e5131c;*/
+/*    color: white;*/
+    /*padding: 10px 15px 10px 15px;*/
+/*    font-size: 16px;*/
+    /*border: none;*/
+/*    cursor: pointer;*/
+        flex: auto;
+}
+.oj-button .oj-button-button{
+    
+}
+/*.oj-button.oj-hover .oj-button-button,*/
+.oj-button.oj-hover.oj-button-full-chrome .oj-button-button{
+    background-color:#e5131c;
+    color:#fff;
+    border-color:#fff;
+}
+.oj-button.oj-hover.oj-focus .oj-button-button{
+    background-color:#e5131c;
+    color:#fff;
+    border-color:#fff;
+}
+
+
+.dropBtnBar button:disabled{  
+    cursor:text;     background-color: #f4f6f7;
+    background-image: none;
+    border-color: #e0e6eb;
+    color: #9e9e9e;
+    box-shadow: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    right:0;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    max-height: 250px;
+    font-size: 16px;
+    min-width: 250px;
+    z-index: 9999;
+    /*overflow-x: scroll;*/
+    overflow-y: scroll;
+    white-space: nowrap;
+}
+
+/* Links inside the dropdown */
+.dropdown-content input:checkbox {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.scrollable-table {
+    height: 100%; 
+    width: 100%; 
+    overflow-x: auto; 
+    overflow-y: hidden;
+}
+
+#colDisplay{
+    padding: 5px 10px;
+}
+
+/* */

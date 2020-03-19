@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<oc-layout-1 id="layoutOrder" has-search-criteria="true" has-bread-crumb="true">
+    <span slot="pageTitleArea">Fallout Details</span>
+        <div slot="breadCrumbArea"> 
+            <a href= "javascript:void(0)" data-bind="click:falloutAt_backorder.bind(falloutAt_paramorderId),visible: falloutFlag() === 'N'">Order (<span data-bind="text:falloutAt_paramorderId"></span>)</a>
+            <span data-bind ="visible: falloutFlag() === 'N'">></span>
+            <a href= "javascript:void(0)" data-bind="click:falloutAt_backtask.bind(falloutAt_paramorderId),visible: falloutFlag() === 'N'">Tasks (<span data-bind="text:falloutAt_paramorderId"></span>)</a>
+            <span data-bind ="visible: falloutFlag() === 'N'">></span>
+            <a href= "javascript:void(0)" data-bind="click:falloutAt_backFallout.bind(falloutAt_paramFoId)">Fallout (<span data-bind="text:falloutAt_paramFoId"></span>)</a>
+            <span>></span>
+            <span>Fallout Details</span>
+        </div>
+    <div class="oj-flex-item" slot="searchCriteriaArea">          
+        <oj-form-layout label-edge="start" id="form-container" id="form-container" class="oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div id="searchAttribute"  data-oj-context  class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-2 oj-md-labels-inline"> 
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label  for="falloutId" style="text-align:left" >Fallout Detail Id</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="falloutId"
+                                       name="falloutId" value="{{falloutAt_searchfoAtId}}"></oj-input-text>
+                    </div>
+                </div>
+
+                <!--                <div id="orderIdGroup" class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <oj-label show-required for="orderIds" style="text-align:left" >Order Id</oj-label>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <oj-input-text id="orderIds" utocomplete="off" required
+                                                       on-valid-changed="[[validChangedListener]]"
+                                                       name="orderIds" value="{{fallout_orderId}}"
+                                                       ></oj-input-text>
+                                    </div>
+                                </div> 
+                                <div id="actionId" class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <oj-label show-required for="actId" style="text-align:left" >Action Id</oj-label>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <oj-input-text id="actIds" utocomplete="off" required
+                                                       on-valid-changed="[[validChangedListener]]"
+                
+                                                       name="actIds" value="{{fallout_actId}}"></oj-input-text>
+                                    </div>
+                                </div>-->
+            </div>
+        </oj-form-layout>
+        <oj-form-layout label-edge="start" id="form-container" max-columns="2">
+            <div class="oj-flex-item"> 
+                <oj-button slot="value" on-oj-action="[[falloutAt_onReset]]">Reset</oj-button>
+                <oj-button slot="value" on-oj-action="[[falloutAt_onSearch]]">Search</oj-button>
+            </div> 
+        </oj-form-layout>
+    </div>
+
+    <div slot="tableArea">
+
+        <!--
+        <oj-button id="payloadBtn" on-oj-action='[[orders_viewPayload]]' disabled="{{!orders_selectedRow()}}">
+            View Payload
+        </oj-button>
+        <oj-button id="rollbackBtn" on-oj-action='[[orders_cancelOrder]]' disabled="{{!orders_selectedRow()}}">
+            Cancel Order
+        </oj-button>-->
+        <oc-table id="ordersTable" 
+                  columns="[[falloutAt_columns]]"
+                  data="[[falloutAt_datasource]]"
+                  display="[[falloutAt_display]]"
+                  columns-default="[[falloutAt_columnsDefault]]"
+                  scroll-policy="[[falloutAt_scrollPolicy]]"
+                  scroll-policy-options="[[falloutAt_scrollPolicyOptions]]"
+                  root-attributes="[[falloutAt_rootAttributes]]"
+                  before-current-row="{{falloutAt_onSelectRow}}"
+                  slot="colDisp pagination">
+            <span slot="fetchSizeArea">
+                <span>Fetch Size: </span>
+                <oj-select-one id="basicSelect" value="{{falloutAt_fetchSize}}" style="max-width:1.3em">
+                    <oj-option value="-1">All</oj-option>
+                    <oj-option value="10">10</oj-option>
+                    <oj-option value="25">25</oj-option>
+                    <oj-option value="50">50</oj-option>
+                </oj-select-one>
+            </span>
+        </oc-table>
+
+    </div>
+
+</oc-layout-1>

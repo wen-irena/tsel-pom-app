@@ -1,0 +1,34 @@
+<div class="oj-flex tile-content" style="height:100%">
+    <div class="oj-flex-item">
+        <div class="oj-flex" style="position:absolute;width:90%;">
+            <div class="oj-flex-item">
+                <oj-bind-text value="[[$properties.content.chartName]]"></oj-bind-text>
+            </div>
+            <div class="oj-flex-item">
+                <oj-button id="refresh" style="float:right">
+                    Refresh
+                </oj-button>
+            </div>
+        </div>
+        <oj-bind-if test='[[$properties.content.chartType === "pie"]]'>
+            <oj-chart id="pieChart"
+                type="pie" 
+                series="[[chartData]]"
+                animation-on-display="auto"
+                animation-on-data-change="auto"
+                style-defaults.three-d-effect="[[threeDValue]]"
+                hover-behavior="dim"
+                style="width:100%;">
+            </oj-chart>
+            <!-- 2D/3D toggle button -->
+            <!-- <demo-chart-three-d-effect-control id="threeDControl" three-d-effect="{{threeDValue}}" aria-controls="pieChart">
+            </demo-chart-three-d-effect-control> -->
+        </oj-bind-if>
+        <oj-bind-if test='[[$properties.content.chartType === "line"]]'>
+
+        </oj-bind-if>
+        <oj-bind-if test='[[$properties.content.chartType === "bar"]]'>
+
+        </oj-bind-if>
+    </div>
+</div>

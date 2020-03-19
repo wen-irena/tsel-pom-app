@@ -1,0 +1,232 @@
+/*
+    Document   : Hendry Y
+    Created on : 07-AUG-2018
+    Author     : Oracle Consulting ID
+    Description:
+        This is where any of your application specific styles should be included
+*/
+/* Header  */
+html:not([dir="rtl"]) .telkomsel-icon {
+    padding-right: 4px;
+}
+.telkomsel-icon:before {
+    display: inline;
+}
+.telkomsel-icon:before {
+    content: " ";
+    background-image: url(images/telkomsel_logo.png);
+    width: 100px;
+    height: 35px;
+    background-position: 0;
+    background-size: 100px 35px;
+    position: absolute;
+    background-repeat: no-repeat;
+    left: 60px;
+    top: 5px;
+}
+.telkomsel-icon {
+    width: 100px;
+}
+
+/* Code Mirror */
+.CodeMirror { height: auto; border: 1px solid #ddd; }
+/*.CodeMirror-scroll { max-height: 250px; }*/
+.CodeMirror pre { padding-left: 7px; line-height: 1.25; }
+/* END Code Mirror */
+
+
+
+.oj-inputtext-input-disabled > input{
+    text-align: left;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: #ededee;
+    pointer-events: none;
+    border-style: solid;
+    border-color: #e5e6e6;
+    border-width: 1px;
+    border-radius: 2px;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: 0;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-weight: normal;
+    width: 100%; 
+}
+
+.action-btn{
+    width:25px;
+    height:auto;
+    padding: 0;
+}
+
+.action-icon{
+    padding: 0!important;
+    font-size: .75em;
+}
+
+.task-status{
+    color: #ffffff;
+    padding: 4px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    max-width: 75px;
+}
+
+.hyperlink-1{
+    text-decoration: underline;
+}
+
+hr.style-six {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.oj-table.oj-table-grid-display {
+  background-color: #ffffff;
+}
+
+.oj-menu-layer {
+   z-index: 9999 !important;
+}
+
+.err-msg{
+    color:red;
+    font-family:monospace;
+    resize: none;
+    width: 60vw !important;
+    height: 10vh !important;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #ddd;
+}
+
+.button-incoming{
+    background-color:#237bb1; 
+    color: white; 
+    padding: 5px; 
+    border-radius: 5px;
+    min-width: 60px;
+    max-width: 100px;
+    margin: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button-success{
+    background-color: #68c182; 
+    color: white; 
+    padding: 5px; 
+    border-radius: 5px;
+    min-width: 60px;
+    max-width: 100px;
+    margin: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button-failed{
+    background-color:#ed6647; 
+    color: white; 
+    padding: 5px; 
+    border-radius: 5px;
+    min-width: 60px;
+    max-width: 100px;
+    margin: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+.database-icon{
+    content: url(images/database-icon.png);
+    width: 100px;
+    height: 100px;
+}
+
+.scheduler-icon{
+    content: url(images/scheduler-icon.png);
+    width: 100px;
+    height: 100px;
+}
+
+.redis-icon{
+    content: url(images/redis-icon.png);
+    width: 100px;
+    height: 100px;
+}
+
+.horizontal{
+    display: inline-block;
+    width: 100px;
+}
+
+
+.color-yellow{
+    color: #f6b846; 
+}
+
+.color-red{
+    color: #de2333; 
+}
+
+.color-green{
+    color: #81ba5f; 
+}
+
+.color-blue{
+    color: #027bc7;
+}
+
+
+.demo-csc-bar-stack,
+.demo-csc-bar-unstack{
+  height: 24px;
+  width: 24px;
+}
+
+.demo-csc-bar-stack:before,
+.demo-csc-bar-unstack:before{
+  display: inline;
+}
+
+.demo-csc-bar-stack:before {
+  content: url("./images/bar_stack_ena.svg");
+}
+.oj-hover .demo-csc-bar-stack:before {
+  content: url("./images/bar_stack_ovr.svg");
+}
+.oj-selected .demo-csc-bar-stack:before {
+  content: url("./images/bar_stack_dwn.svg");
+}
+
+.demo-csc-bar-unstack:before {
+  content: url("./images/bar_unstack_ena.svg");
+}
+.oj-hover .demo-csc-bar-unstack:before {
+  content: url("./images/bar_unstack_ovr.svg");
+}
+.oj-selected .demo-csc-bar-unstack:before {
+  content: url("./images/bar_unstack_dwn.svg");
+}
+
+.oj-button-jqui.oj-default.oj-button-full-chrome, 
+.oj-button-jqui.oj-focus-only.oj-button-full-chrome, 
+.oj-button.oj-default.oj-button-full-chrome .oj-button-button, 
+.oj-button.oj-focus-only.oj-button-full-chrome .oj-button-button{
+    border-color: #BA0006;
+}
+
+#hourly-content, 
+#orderType-content,
+#salesChannel-content {
+  max-height: 430px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}

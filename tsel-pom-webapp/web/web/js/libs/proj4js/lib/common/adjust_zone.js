@@ -1,0 +1,1 @@
+import adjust_lon from"./adjust_lon";export default function(t,o){if(void 0===t){if((t=Math.floor(30*(adjust_lon(o)+Math.PI)/Math.PI)+1)<0)return 0;if(t>60)return 60}return t};

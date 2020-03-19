@@ -1,0 +1,1 @@
+export default function(t){return 1-.25*t*(1+t/16*(3+1.25*t))};

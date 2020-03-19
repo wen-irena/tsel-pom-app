@@ -1,0 +1,1 @@
+export default function(t,e){return Math.pow((1-t)/(1+t),e)};

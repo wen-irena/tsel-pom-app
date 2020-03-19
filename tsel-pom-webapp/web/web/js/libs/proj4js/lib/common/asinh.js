@@ -1,0 +1,1 @@
+export default function(t){return(t>=0?1:-1)*Math.log(Math.abs(t)+Math.sqrt(t*t+1))};

@@ -1,0 +1,42 @@
+{
+    "name": "oc-button",
+    "description": "Custom button with confirmation dialog",
+    "version": "1.0.0",
+    "jetVersion": ">=4.0.0 <5.0.0",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "disabled": {
+            "type": "boolean"
+        },
+        "class": {
+            "type": "string"
+        },
+        "label": {
+            "type": "string"
+        },
+        "value": {
+            "type": "string",
+            "writeback": true
+        },
+        "title": {
+            "type": "string"
+        },
+        "dialogName": {
+            "type": "string"
+        },
+        "confirmationMessage": {
+            "type": "string"
+        },
+        "confirmationAction": {
+            "type": "function"
+        },
+        "iconClass": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object"
+        }
+    }
+}

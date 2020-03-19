@@ -1,0 +1,1 @@
+var ignoredChar=/[\s_\-\/\(\)]/g;export default function match(e,r){if(e[r])return e[r];for(var a,o=Object.keys(e),t=r.toLowerCase().replace(ignoredChar,""),n=-1;++n<o.length;)if((a=o[n]).toLowerCase().replace(ignoredChar,"")===t)return e[a]};

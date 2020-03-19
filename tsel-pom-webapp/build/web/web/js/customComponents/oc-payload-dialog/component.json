@@ -1,0 +1,29 @@
+{
+    "name": "oc-payload-dialog",
+    "description": "Custom table with display to column filter",
+    "version": "1.0.0",
+    "jetVersion": ">=4.0.0 <5.0.0",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "initDataOnLoad": {
+            "type": "boolean"
+        },
+        "originalPayload": {
+            "type": "string"
+        },
+        "updatePayload": {
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "displayOriginal": {
+            "type": "boolean"
+        },
+        "buttonName": {
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,59 @@
+{
+    "name": "oc-table",
+    "description": "Custom table with display to column filter",
+    "version": "1.0.0",
+    "jetVersion": ">=4.0.0 <5.0.0",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "initTableOnLoad": {
+            "type": "boolean"
+        },
+        "dialogTableColumns": {
+            "type": "array"
+        },
+        "dialogQueryParams": {
+            "type": "array"
+        },
+        "dialogTablePrimaryKey": {
+            "type": "string"
+        },
+        "output": {
+            "type": "function"
+        },
+        "displayValue": {
+            "type": "string"
+        },
+        "value": {
+            "type": "string"
+        },
+        "queryFormColumns": {
+            "type": "integer"
+        },
+        "serviceUrl": {
+            "type": "string"
+        },
+        "required": {
+          "type":"boolean"  
+        },
+        "dialogName": {
+            "type": "string"
+        },
+        "labelHint": {
+            "type": "string"
+        }
+    },
+    "events": {
+        "selectDialog": {
+          "description": "Triggered when a dialog table row is selected",
+          "bubbles": true,
+          "detail": {
+            "value": {
+              "description": "Objecct of selected dialog table row",
+              "type": "object"
+            }
+          }
+        }
+    }
+}

@@ -1,0 +1,140 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<oc-layout-1 id="layoutOrder" has-search-criteria="true" has-bread-crumb="false">
+    <span slot="pageTitleArea">Service Detail (<oj-bind-text value='[[serviceDtl_searchSystem]]'></oj-bind-text> - <oj-bind-text value='[[serviceDtl_searchOperation]]'></oj-bind-text>)</span>
+    <div class="oj-flex-item" slot="searchCriteriaArea">
+        <oj-form-layout label-edge="start" id="form-container" class="oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-2 oj-md-labels-inline">
+                <!-- <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchSystem" style="text-align:left">System</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="searchSystem" label-hint="Id" value="{{serviceDtl_searchSystem}}"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchOperation" style="text-align:left">Operation</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="searchOperation" label-hint="Id" value="{{serviceDtl_searchOperation}}"></oj-input-text>
+                    </div>
+                </div> -->
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchMsisdn" style="text-align:left">MSISDN</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="searchMsisdn" label-hint="Id" value="{{serviceDtl_searchMsisdn}}"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchOrderID" style="text-align:left">Order ID</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="searchOrderID" label-hint="Id" value="{{serviceDtl_searchOrderID}}"></oj-input-text>
+                    </div>
+                </div>
+            </div>
+        </oj-form-layout>
+        <oj-form-layout label-edge="start" id="form-container" max-columns="2">
+            <div class="oj-flex-item">
+                <oj-button slot="value" on-oj-action="[[serviceDtl_onReset]]">Reset</oj-button>
+                <oj-button slot="value" on-oj-action="[[serviceDtl_onSearch]]">Search</oj-button>
+            </div>
+        </oj-form-layout>
+    </div>
+
+    <div class="oj-flex-item" slot="searchCriteriaArea">
+        <oj-form-layout label-edge="start" id="form-container" class="oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-2 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchOrderType" style="text-align:left">Order Type</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-select-one id="searchOrderType" options="{{service_orderType}}" value="{{serviceDtl_searchOrderType}}" placeholder="Select Order Type..." required="false">
+                        </oj-select-one>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label style="text-align:left">Created Date</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-date id="datepickercontrol" placeholder="Start Date" value="{{serviceDtl_startDate}}" max="[[serviceDtl_endDate]]" converter="[[serviceDtl_dateConverter]]" style="max-width:175px"> </oj-input-date>
+                        to
+                        <oj-input-date id="datepickercontrol2" placeholder="End Date" value="{{serviceDtl_endDate}}" min="[[serviceDtl_startDate]]" converter="[[serviceDtl_dateConverter]]" style="max-width:175px"> </oj-input-date>
+                    </div>
+                </div>
+            </div>
+        </oj-form-layout>
+    </div>
+
+    <div slot="tableArea">
+        <div style="position:absolute">
+            <oj-button slot="value" on-oj-action="[[exportToCSV]]">Export to CSV</oj-button>
+        </div>
+        <oc-table id="workordersTable" columns="[[serviceDtl_columns]]" data="[[serviceDtl_datasource]]" display="[[serviceDtl_display]]" columns-default="[[serviceDtl_columnsDefault]]" scroll-policy="[[serviceDtl_scrollPolicy]]" scroll-policy-options="[[serviceDtl_scrollPolicyOptions]]"
+            root-attributes="[[serviceDtl_rootAttributes]]" slot="colDisp pagination">
+            <span slot="fetchSizeArea">
+                    <span>Fetch Size: </span>
+            <oj-select-one id="basicSelect" value="{{serviceDtl_fetchSize}}" style="max-width:1.3em">
+                <oj-option value="-1">All</oj-option>
+                <oj-option value="10">10</oj-option>
+                <oj-option value="25">25</oj-option>
+                <oj-option value="50">50</oj-option>
+            </oj-select-one>
+            </span>
+        </oc-table>
+    </div>
+</oc-layout-1>
+
+<div id="dialogWrapper">
+    <oj-dialog style="display:none; min-width:40%;" id="confirmationDialog" title="Confirmation">
+        <div slot="header">
+            <span id="dialog-title-id" class="oj-dialog-title">Confirmation</span>
+        </div>
+        <div slot="body">
+            <p>Are you sure to process this action?</p>
+        </div>
+        <div slot="footer">
+            <oj-button id="yesButton" data-bind="click: function() {
+            document.querySelector('#confirmationDialog').close();
+          }">Yes
+            </oj-button>
+            <oj-button id="noButton" data-bind="click: function() {
+            document.querySelector('#confirmationDialog').close();
+          }">No
+            </oj-button>
+        </div>
+    </oj-dialog>
+</div>
+
+
+
+
+<script type="text/html" id="servicedetail-audit-template">
+    <td>
+        <div>
+            Created By :
+            <oj-bind-text value="[[createdBy?createdBy:'-']]"></oj-bind-text>
+        </div>
+        <div>
+            Created Date :
+            <oj-bind-text value="{{createdDate?serviceDtl_dateTimeRenderer2(createdDate):'-'}}"></oj-bind-text>
+        </div>
+        <!-- <div>
+            Updated By :
+            <oj-bind-text value="[[updatedBy?updatedBy:'-']]"></oj-bind-text>
+        </div> -->
+        <div>
+            Updated Date :
+            <oj-bind-text value="{{updatedDate?serviceDtl_dateTimeRenderer2(updatedDate):'-'}}"></oj-bind-text>
+        </div>
+    </td>
+</script>

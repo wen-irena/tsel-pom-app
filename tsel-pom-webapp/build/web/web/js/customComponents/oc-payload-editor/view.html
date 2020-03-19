@@ -1,0 +1,41 @@
+<!-- <oj-form-layout label-edge="start" id="form-container" max-columns="2">
+    <div class="oj-flex-item">
+        <div class="oj-flex"> 
+        <oj-label for="oriPayloadEditor">Original Payload</oj-label>
+         
+            <textarea rows="20" id="oriPayloadEditor" name="oriPayloadEditor" data-bind="text:$properties.originalPayload"></textarea>
+         
+        </div>
+    </div>
+    <div class="oj-flex-item">
+        <div class="oj-flex">    
+            <oj-label for="editedPayloadEditor">Edited Payload</oj-label>
+           
+                <textarea rows="20" id="editedPayloadEditor" name="editedPayloadEditor" data-bind="text:$properties.updatePayload"></textarea>
+            
+        </div>
+    </div>
+</oj-form-layout> -->
+<div class="oj-form-layout">
+    <div class="oj-form oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
+        <div class="oj-flex">
+            <div class="oj-flex-item div-ori" style="display:none;">
+                
+                <div style="width:95%;margin:0 2.5%;">
+                        <oj-label for="oriPayloadEditor">Original Payload</oj-label>
+                    <textarea rows="20" id="oriPayloadEditor" name="oriPayloadEditor" data-bind="text:$properties.originalPayload"></textarea>
+                </div>
+            </div>
+            <div class="oj-flex-item" >
+                
+                <div style="width:95%;margin:0 2.5%;">
+                        <oj-label for="editedPayloadEditor">Edited Payload</oj-label>
+                    <textarea rows="20" id="editedPayloadEditor" name="editedPayloadEditor" data-bind="text:$properties.updatePayload"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pull-right retry-action" style="display:none;">
+    <oj-button id="saveBtn" on-oj-action="[[onClickSavePayload]]">Retry</oj-button>
+</div>

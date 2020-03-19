@@ -1,0 +1,1 @@
+export default function(a,t,r,h,n){var s,M;s=a/t;for(var o=0;o<15;o++)if(s+=M=(a-(t*s-r*Math.sin(2*s)+h*Math.sin(4*s)-n*Math.sin(6*s)))/(t-2*r*Math.cos(2*s)+4*h*Math.cos(4*s)-6*n*Math.cos(6*s)),Math.abs(M)<=1e-10)return s;return NaN};

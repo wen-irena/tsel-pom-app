@@ -1,0 +1,1 @@
+export default function(t){return 2*Math.log(Math.sqrt((t+1)/2)+Math.sqrt((t-1)/2))};

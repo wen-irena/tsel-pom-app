@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+    <h3>
+        <oj-bind-slot name="pageTitleArea">
+        </oj-bind-slot>
+    </h3>
+    <oj-bind-if test='[[$properties.hasBreadCrumb]]'>
+    <div class="oj-flex">
+        <div class="oj-flex-item">
+            <oj-bind-slot name="breadCrumbArea">
+            </oj-bind-slot>
+        </div>
+    </div>
+    </oj-bind-if>
+    <oj-bind-if test='[[$properties.hasSearchCriteria]]'>
+    <div class="oj-flex">
+        <div class="oj-flex-item">
+            <div class="oj-panel oj-panel-alt1">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <h4>Search</h4>
+                        <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout">
+                            <oj-bind-slot name="searchCriteriaArea">
+                            </oj-bind-slot>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </oj-bind-if>
+    <br>
+    
+    <div class="oj-flex">    
+        <div id="pagingControlDemo" style="width:100%">
+            <oj-bind-slot name="tableArea">
+            </oj-bind-slot>
+        </div>
+    </div>
+</div>
+<div id="dialogWrapper">
+    <oj-bind-slot name="dialogArea">
+    </oj-bind-slot>
+</div>

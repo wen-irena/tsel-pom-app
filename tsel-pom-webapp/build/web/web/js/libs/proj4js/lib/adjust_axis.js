@@ -1,0 +1,1 @@
+export default function(e,a,r){var s,c,i,t=r.x,u=r.y,b=r.z||0,d={};for(i=0;i<3;i++)if(!a||2!==i||void 0!==r.z)switch(0===i?(s=t,c="x"):1===i?(s=u,c="y"):(s=b,c="z"),e.axis[i]){case"e":d[c]=s;break;case"w":d[c]=-s;break;case"n":d[c]=s;break;case"s":d[c]=-s;break;case"u":void 0!==r[c]&&(d.z=s);break;case"d":void 0!==r[c]&&(d.z=-s);break;default:return null}return d};

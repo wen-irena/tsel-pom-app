@@ -1,0 +1,1 @@
+export default function(t){var e=Math.exp(t);return e=(e-1/e)/(e+1/e)};

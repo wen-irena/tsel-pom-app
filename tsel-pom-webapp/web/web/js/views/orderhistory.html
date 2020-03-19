@@ -1,0 +1,98 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+ <oc-layout-1 id="layoutOrder" has-search-criteria="true" has-bread-crumb="false">
+    <span slot="pageTitleArea">Service Detail</span>
+    <div class="oj-flex-item" slot="searchCriteriaArea">        
+       <oj-form-layout label-edge="start" id="form-container" class="oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-2 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                      <oj-label for="searchWorkorder" style="text-align:left">OA ID</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="searchWorkorder" label-hint="Id" value="{{orderhistory_searchWorkOrderId}}"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                      <oj-label for="searchWorkorder" style="text-align:left">ACT Type</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="searchWorkorder" label-hint="Id" value="{{orderhistory_searchWorkOrderId}}"></oj-input-text>
+                    </div>
+                </div>
+            </div>
+       </oj-form-layout>
+        <oj-form-layout label-edge="start" id="form-container" max-columns="2">
+            <div class="oj-flex-item">
+                <oj-button slot="value" on-oj-action="[[orderhistory_onReset]]">Reset</oj-button>
+                <oj-button slot="value" on-oj-action="[[orderhistory_onSearch]]">Search</oj-button>
+            </div>
+        </oj-form-layout>
+    </div>
+
+  <div slot="tableArea">
+            <oc-table id="workordersTable" 
+                columns="[[orderhistory_columns]]"
+                data="[[orderhistory_datasource]]"
+                display="[[orderhistory_display]]"
+                columns-default="[[orderhistory_columnsDefault]]"
+                scroll-policy="[[orderhistory_scrollPolicy]]"
+                scroll-policy-options="[[orderhistory_scrollPolicyOptions]]"
+                root-attributes="[[orderhistory_rootAttributes]]"
+                slot="colDisp pagination">
+                <span slot="fetchSizeArea">
+                    <span>Fetch Size: </span>
+                    <oj-select-one id="basicSelect" value="{{orderhistory_fetchSize}}" style="max-width:1.3em">
+                        <oj-option value="-1">All</oj-option>
+                        <oj-option value="10">10</oj-option>
+                        <oj-option value="25">25</oj-option>
+                        <oj-option value="50">50</oj-option>
+                    </oj-select-one>
+                </span>
+            </oc-table>     
+    </div>
+</oc-layout-1>
+ 
+<div id="dialogWrapper">
+    <oj-dialog style="display:none; min-width:40%;" id="confirmationDialog" title="Confirmation">
+      <div slot="header">
+          <span id="dialog-title-id" class="oj-dialog-title">Confirmation</span>
+      </div>
+      <div slot="body">
+          <p>Are you sure to process this action?</p>
+      </div>
+      <div slot="footer">
+        <oj-button id="yesButton" data-bind="click: function() {
+            document.querySelector('#confirmationDialog').close();
+          }">Yes
+        </oj-button>
+        <oj-button id="noButton" data-bind="click: function() {
+            document.querySelector('#confirmationDialog').close();
+          }">No
+        </oj-button>
+      </div>
+    </oj-dialog>
+</div>
+
+
+
+
+<script type="text/html" id="task-audit-template">
+    <td>
+        <div>
+            Created By : <oj-bind-text value="[[createdBy?createdBy:'-']]"></oj-bind-text>
+        </div>
+        <div>
+            Created Date : <oj-bind-text value="{{createdDate?orderhistory_dateTimeRenderer2(createdDate):'-'}}"></oj-bind-text>
+        </div>
+        <div>
+            Updated By : <oj-bind-text value="[[updatedBy?updatedBy:'-']]"></oj-bind-text>
+        </div>
+        <div>
+            Updated Date : <oj-bind-text value="{{updatedDate?orderhistory_dateTimeRenderer2(updatedDate):'-'}}"></oj-bind-text>
+        </div>
+    </td>
+</script>

@@ -1,0 +1,1 @@
+import{HALF_PI}from"../constants/values";export default function(t,a){for(var n,r,o=.5*t,e=HALF_PI-2*Math.atan(a),f=0;f<=15;f++)if(n=t*Math.sin(e),e+=r=HALF_PI-2*Math.atan(a*Math.pow((1-n)/(1+n),o))-e,Math.abs(r)<=1e-10)return e;return-9999};

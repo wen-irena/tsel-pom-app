@@ -1,0 +1,1 @@
+export default function(t){return Math.abs(t)>1&&(t=t>1?1:-1),Math.asin(t)};

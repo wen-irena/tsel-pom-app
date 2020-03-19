@@ -1,0 +1,1 @@
+import hypot from"./hypot";import log1py from"./log1py";export default function(o){var t=Math.abs(o);return t=log1py(t*(1+t/(hypot(1,t)+1))),o<0?-t:t};

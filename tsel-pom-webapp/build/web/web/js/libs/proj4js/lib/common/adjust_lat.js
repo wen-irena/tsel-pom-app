@@ -1,0 +1,1 @@
+import{HALF_PI}from"../constants/values";import sign from"./sign";export default function(t){return Math.abs(t)<HALF_PI?t:t-sign(t)*Math.PI};

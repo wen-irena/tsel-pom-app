@@ -1,0 +1,1 @@
+import{HALF_PI}from"../constants/values";export default function(t,a,n){var o=t*n,r=.5*t;return o=Math.pow((1-o)/(1+o),r),Math.tan(.5*(HALF_PI-a))/o};

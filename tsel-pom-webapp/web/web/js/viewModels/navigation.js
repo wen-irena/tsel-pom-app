@@ -1,0 +1,1 @@
+define(["ojs/ojcore","knockout","jquery","common/restService"],function(n,e,r,t){return function(){var e=this;e.handleActivated=function(r){return new Promise(function(r,o){getRestData(t.navigationService,null,null,function(t,o){navArray="ERROR"!==t?t:[],e.navDataSource=new n.JsonTreeDataSource(navArray),r()})})}}});

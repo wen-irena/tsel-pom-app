@@ -1,0 +1,144 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+    <h3 class="oj-header-border"><b>DASHBOARD SCHEDULER</b></h3><br>
+    <div class="demo-row-classes  demo-flex-display oj-flex-items-pad">
+        <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-space-between">
+            <div class="oj-flex-item">
+                <h5><b>Current Scheduler Total : <span data-bind="text:dashboard_totalScheduler"></span></b></h5>
+            </div>
+            <div class="oj-flex-item"></div>
+            <div class="oj-flex-item">
+                <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-flex-end">
+                    <div class="oj-flex-item">
+                        <div class="oj-form-layout">
+                            <div class="oj-form oj-md-labels-inline">
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <oj-label for="datepickercontrol2" style="font-weight: bold;">Search All</oj-label>
+                                    </div>
+                                    <div class="oj-flex-item" style="min-width: 260px;">
+                                        <oj-input-date id="datepickercontrol2" placeholder="Choose Date..." value="{{dashboard_searchDate}}" converter="[[dashboard_dateConverter]]" required="true"> </oj-input-date>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <oj-button id="searchorder" on-oj-action="[[dashboard_onSearch]]">
+                                            <i class="fas fa-search"></i>
+                                        </oj-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-xl-4">
+            <div class="oj-panel" style="height:450px;">
+                <h4 class="oj-header-border"><b>Collection CR</b></h4>
+                <oc-table id="dashboardTable" columns="[[dashboard_columnsCR]]" data="[[dashboard_datasourceCR]]" display="[[dashboard_displayCR]]" columns-default="[[dashboard_columnsDefaultCR]]" scroll-policy="[[dashboard_scrollPolicyCR]]" scroll-policy-options="[[dashboard_scrollPolicyOptionsCR]]"
+                    root-attributes="[[dashboard_rootAttributesCR]]" slot="colDisp pagination">
+                </oc-table>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-xl-4">
+            <div class="oj-panel" style="height:450px;">
+                <h4 class="oj-header-border"><b>Collection SC</b></h4>
+                <oc-table id="dashboardTableSC" columns="[[dashboard_columnsSC]]" data="[[dashboard_datasourceSC]]" display="[[dashboard_displaySC]]" columns-default="[[dashboard_columnsDefaultSC]]" scroll-policy="[[dashboard_scrollPolicySC]]" scroll-policy-options="[[dashboard_scrollPolicyOptionsSC]]"
+                    root-attributes="[[dashboard_rootAttributesSC]]" slot="colDisp pagination">
+                </oc-table>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-xl-4">
+            <div class="oj-panel" style="height:450px;">
+                <h4 class="oj-header-border"><b>Scheduler Midnight</b></h4>
+                <oc-table id="dashboardTableSM" columns="[[dashboard_columnsSM]]" data="[[dashboard_datasourceSM]]" display="[[dashboard_displaySM]]" columns-default="[[dashboard_columnsDefaultSM]]" scroll-policy="[[dashboard_scrollPolicySM]]" scroll-policy-options="[[dashboard_scrollPolicyOptionsSM]]"
+                    root-attributes="[[dashboard_rootAttributesSM]]" slot="colDisp pagination">
+                </oc-table>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-8 oj-xl-8">
+            <div class="oj-panel" style="height:450px;">
+                <h4 class="oj-header-border"><b>Stuck Order Count</b></h4>
+                <div style="height:90%;overflow-y: auto;">
+                    <oc-table id="dashboardTableSOC" columns="[[dashboard_columnsSOC]]" data="[[dashboard_datasourceSOC]]" display="[[dashboard_displaySOC]]" columns-default="[[dashboard_columnsDefaultSOC]]" scroll-policy="[[dashboard_scrollPolicySOC]]" scroll-policy-options="[[dashboard_scrollPolicyOptionsSOC]]"
+                        root-attributes="[[dashboard_rootAttributesSOC]]" slot="colDisp pagination">
+                    </oc-table>
+                </div>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-xl-4">
+            <div class="oj-panel" style="height:450px;">
+                <h4 class="oj-header-border"><b>Hourly Operation Code</b></h4>
+                <div style="position:absolute;display:none;">
+                    <oj-select-one id="searchOrderType" style="min-width:180px;" options="{{dashboard_operationCodeLOV}}" value="{{dashboard_searchOperationCode}}" placeholder="Select Operation Code..." required="false" on-value-changed="[[dashboard_operationCodeOnChange]]">
+                    </oj-select-one>
+                </div>
+                <oc-table style="display:none;" id="dashboardTableHOC" columns="[[dashboard_columnsHOC]]" data="[[dashboard_datasourceHOC]]" display="[[dashboard_displayHOC]]" columns-default="[[dashboard_columnsDefaultHOC]]" scroll-policy="[[dashboard_scrollPolicyHOC]]" scroll-policy-options="[[dashboard_scrollPolicyOptionsHOC]]"
+                    root-attributes="[[dashboard_rootAttributesHOC]]" slot="colDisp pagination">
+                </oc-table>
+                <span style="color:red; font-style: italic;">Currently not available.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/html" id="detail-template">
+    <td>
+        <oj-button id="detailBtn" class="oj-button" title="Detail" on-oj-action="[[dashboard_onClickServiceDetail]]">Detail
+        </oj-button>
+    </td>
+</script>
+
+<script type="text/html" id="cr-request-template">
+    <td>
+        <oj-bind-if test="[[requestStatus !== 'CO']]">
+            <!--<oj-button id="detailBtn" class="oj-button" on-oj-action="[[dashboard_onClickCollectionCR]]"><span data-bind="text:totalRequest"></span>
+            </oj-button>-->
+            <a title="View Collection Detail" href="javascript:void(0)" id="colclick1" data-bind="text: [[totalRequest]], click:dashboard_onClickCollectionCR.bind($data)"></a>
+        </oj-bind-if>
+        <oj-bind-if test="[[requestStatus === 'CO']]">
+            <span data-bind="text:totalRequest"></span>
+        </oj-bind-if>
+    </td>
+</script>
+
+<script type="text/html" id="sc-request-template">
+    <td>
+        <oj-bind-if test="[[requestStatus !== 'CO']]">
+            <!--<oj-button id="detailBtn" class="oj-button" on-oj-action="[[dashboard_onClickCollectionSC]]"><span data-bind="text:request"></span>
+            </oj-button>-->
+            <a title="View Collection Detail" href="javascript:void(0)" id="colclick" data-bind="text: [[totalRequest]], click:dashboard_onClickCollectionSC.bind($data)"></a>
+        </oj-bind-if>
+        <oj-bind-if test="[[requestStatus === 'CO']]">
+            <span data-bind="text:totalRequest"></span>
+        </oj-bind-if>
+    </td>
+</script>
+
+
+<script type="text/html" id="soc-status-template">
+    <td>
+        <div class="task-status oj-text-sm" data-bind="text:status, style: { backgroundColor: status==='NORMAL'?'green':(status==='HIGH'?'red':'grey')}"></div>
+    </td>
+</script>
+
+<script type="text/html" id="tc-template">
+    <th>Count<br>(<=1/>1)</th>
+</script>
+
+<script type="text/html" id="mma-template">
+    <th>Min - Max<br>Aging</th>
+</script>
+
+<script type="text/html" id="ral-template">
+    <th>Retry Attempts<br>Left</th>
+</script>

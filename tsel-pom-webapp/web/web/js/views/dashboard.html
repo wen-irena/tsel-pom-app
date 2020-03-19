@@ -1,0 +1,99 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+    <h3 class="oj-header-border"><b>DASHBOARD</b></h3>
+  <br>
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+            <div class="oj-panel">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <h4><b>Daily Order SLA Performance</b></h4>
+                    </div>
+                    <div class="oj-flex-item" align="right">
+                        <oj-input-date id="datepickercontrol1" placeholder="Choose Start Date..." value="{{dashboard_startDate}}" max="[[dashboard_endDate]]" converter="[[dashboard_dateConverter]]"> </oj-input-date>
+                        <oj-input-date id="datepickercontrol2" placeholder="Choose End Date..." value="{{dashboard_endDate}}" min="[[dashboard_startDate]]" converter="[[dashboard_dateConverter]]"> </oj-input-date>
+                        <oj-button id="searchorder" on-oj-action='[[onApplyChart]]'>
+                            <i class="fas fa-search"></i>
+                        </oj-button>
+                        <oj-button id="refresh" on-oj-action='[[onApplyChart]]'>
+                            <i class="fas fa-sync"></i>
+                        </oj-button>
+                    </div>
+                </div><hr>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-chart id="chart1"
+                            type="combo"
+                            series="[[mixedSeriesValue]]"
+                            groups="[[mixedGroupsValue]]"
+                            animation-on-display="auto"
+                            animation-on-data-change="auto"
+                            time-axis-type="mixedFrequency"
+                            orientation="[[orientationValue]]"
+                            x-axis="[[xAxisOptions2]]"
+                            y-axis.title="Total Order Count"
+                            y2-axis.min="0" y2-axis.max="1"
+                            y2-axis.tick-label.converter="[[y2Converter]]" y2-axis.align-tick-marks="off" y2-axis.major-tick.rendered="off"
+                            y2-axis.title="% > 5 minutes"
+                            legend.rendered="off"
+                            style="width:100%;height:200px;float:right;">
+                        </oj-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <br />
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-xl-4">
+            <div class="oj-panel" style="height:450px">
+                <h4 class="oj-header-border"><b>Hourly Order Performance</b></h4>
+                <oj-chart id="chart1"
+                    type="bar"
+                    series="[[dashboard_hourlySeriesValue]]"
+                    groups="[[mixedGroupsValue]]"
+                    animation-on-display="auto"
+                    animation-on-data-change="auto"
+                    time-axis-type="mixedFrequency"
+                    orientation="[[orientationValue]]"
+                    x-axis="[[xAxisOptions1]]"
+                    legend.rendered="off"
+                    style="width:100%;height:350px;float:right;">
+                </oj-chart>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-xl-4">
+            <div class="oj-panel" style="height:450px">
+                <h4 class="oj-header-border"><b>Top Order Type</b></h4>
+                    <oc-table id="dashboardTable" 
+                        columns="[[dashboard_columns]]"
+                        data="[[dashboard_datasource]]"
+                        display="[[dashboard_display]]"
+                        columns-default="[[dashboard_columnsDefault]]"
+                        scroll-policy="[[dashboard_scrollPolicy]]"
+                        scroll-policy-options="[[dashboard_scrollPolicyOptions]]"
+                        root-attributes="[[dashboard_rootAttributes]]"
+                        slot="colDisp pagination">
+                    </oc-table>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-sm-12 oj-md-12 oj-lg-4 oj-xl-4">
+            <div class="oj-panel" style="height:450px">
+                <h4 class="oj-header-border"><b>Top Sales Channel</b></h4>
+                    <oc-table id="dashboardTable2" 
+                        columns="[[dashboard_columns]]"
+                        data="[[dashboard_datasource]]"
+                        display="[[dashboard_display]]"
+                        columns-default="[[dashboard_columnsDefault]]"
+                        scroll-policy="[[dashboard_scrollPolicy]]"
+                        scroll-policy-options="[[dashboard_scrollPolicyOptions]]"
+                        root-attributes="[[dashboard_rootAttributes]]"
+                        slot="colDisp pagination">
+                    </oc-table>
+            </div>
+        </div>
+    </div>
+</div>

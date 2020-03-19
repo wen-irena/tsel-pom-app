@@ -1,0 +1,164 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<oc-layout-1 id="layoutOrder" has-search-criteria="true" has-bread-crumb="false">
+    <span slot="pageTitleArea">Collection Monitoring</span>
+    <span slot="breadCrumbArea">Collection Monitoring</span>
+    <div class="oj-flex-item" slot="searchCriteriaArea">
+        <oj-form-layout label-edge="start" id="form-container" id="form-container">
+            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-2 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchCustomerID" style="text-align:left">Customer ID</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="searchCustomerID" value="{{collmonitoring_customerID}}"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchSubscriberID" style="text-align:left">Subscriber ID</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="searchSubscriberID" value="{{collmonitoring_subscriberID}}"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchMsisdn" style="text-align:left">MSISDN</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="searchMsisdn" value="{{collmonitoring_msisdn}}"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchTarget" style="text-align:left">Target</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-select-one id="searchTarget" options="{{collmonitoring_targetLOV}}" value="{{collmonitoring_target}}" placeholder="Select Target..." required="false">
+                        </oj-select-one>
+                    </div>
+                </div>
+            </div>
+        </oj-form-layout>
+        <oj-form-layout label-edge="start" id="form-container" max-columns="2">
+            <div class="oj-flex-item">
+                <oj-button slot="value" on-oj-action="[[collmonitoring_onReset]]">Reset</oj-button>
+                <oj-button slot="value" on-oj-action="[[collmonitoring_onSearch]]">Search</oj-button>
+            </div>
+        </oj-form-layout>
+    </div>
+
+    <div class="oj-flex-item" slot="searchCriteriaArea">
+        <oj-form-layout label-edge="start" id="form-container" id="form-container" class="oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-2 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchAction" style="text-align:left">Action</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-select-one id="searchAction" options="{{collmonitoring_actionLOV}}" value="{{collmonitoring_actionStatus}}" placeholder="Select Action..." required="false">
+                        </oj-select-one>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchStatus" style="text-align:left">Status</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-select-one id="searchStatus" options="{{collmonitoring_statusLOV}}" value="{{collmonitoring_statusStatus}}" placeholder="Select Status..." required="false">
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label style="text-align:left">Trx Date</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-date-time id="datepickercontrol" placeholder="Start Date" value="{{collmonitoring_startDate}}" max="[[collmonitoring_endDate]]" converter="[[collmonitoring_dateTimeConverter]]" time-picker='{"timeIncrement":"00:01:00:00"}' style="max-width:175px" required="true">
+                        </oj-input-date-time>
+                        to
+                        <oj-input-date-time id="datepickercontrol2" placeholder="End Date" value="{{collmonitoring_endDate}}" min="[[collmonitoring_startDate]]" converter="[[collmonitoring_dateTimeConverter]]" time-picker='{"timeIncrement":"00:01:00:00"}' style="max-width:175px" required="true">
+                        </oj-input-date-time>
+                    </div>
+                </div>
+            </div>
+        </oj-form-layout>
+    </div>
+
+    <div slot="tableArea">
+        <oc-table id="ordersTable" columns="[[collmonitoring_columns]]" data="[[collmonitoring_datasource]]" display="[[collmonitoring_display]]" columns-default="[[collmonitoring_columnsDefault]]" scroll-policy="[[collmonitoring_scrollPolicy]]" scroll-policy-options="[[collmonitoring_scrollPolicyOptions]]"
+            root-attributes="[[collmonitoring_rootAttributes]]" slot="colDisp pagination">
+            <span slot="fetchSizeArea">
+                    <span>Fetch Size: </span>
+            <oj-select-one id="basicSelect" value="{{collmonitoring_fetchSize}}" style="max-width:1.3em">
+                <oj-option value="-1">All</oj-option>
+                <oj-option value="100">100</oj-option>
+                <oj-option value="250">250</oj-option>
+                <oj-option value="500">500</oj-option>
+                <oj-option value="1000">1000</oj-option>
+            </oj-select-one>
+            </span>
+        </oc-table>
+
+        <!-- Payload ORI Dialog -->
+        <oj-dialog style="display:none; min-width:min-content;" id="detailDialog" title="View Detail">
+            <div slot="header">
+                <span id="dialog-title-id" class="oj-dialog-title">View Detail</span>
+            </div>
+            <div slot="body" style="max-height:70%;">
+                <!-- Tab Bar BEGIN -->
+                <div class="error-message-area">
+                    <h5 style="color:#b70f17">Error Message</h5>
+                    <textarea class="err-msg" id="collmonitoring_errorMessage" name="collmonitoring_errorMessage" value='[[collmonitoring_errorMessage]]' readonly ></textarea>
+                </div>                
+                <div id="demo-container" class="oj-flex demo-edge-top">
+                    <oj-tab-bar id="hnavlist" edge="top" selection="{{selectedItemOrders}}">
+                        <ul>
+                            <li id="ori">
+                                <a href="#" aria-controls="ori-tab-panel" id="ori-tab">
+                                    Request Payload
+                                </a>
+                            </li>
+                            <li id="updated">
+                                <a href="#" aria-controls="updated-tab-panel" id="updated-tab">
+                                    Response Payload
+                                </a>
+                            </li>
+                        </ul>
+                    </oj-tab-bar>
+
+                    <oj-switcher value="[[selectedItemOrders]]">
+                        <div slot="ori" id="ori-tab-panel" role="tabpanel" aria-labelledby="ori-tab">
+                            <div class="demo-tab-content">
+                                <textarea id="collmonitoring_requestPayload" name="collmonitoring_requestPayload" value='[[collmonitoring_requestPayload]]'></textarea>
+                            </div>
+                        </div>
+                        <div slot="updated" id="updated-tab-panel" role="tabpanel" aria-labelledby="updated-tab">
+                            <div class="demo-tab-content">
+                                <textarea id="collmonitoring_responsePayload" name="collmonitoring_responsePayload" value='[[collmonitoring_responsePayload]]'></textarea>
+                            </div>
+                        </div>
+                    </oj-switcher>
+                </div>
+
+                <!-- Tab Bar END -->
+            </div>
+        </oj-dialog>
+
+    </div>
+</oc-layout-1>
+
+<script type="text/html" id="action-template">
+    <td>
+        <oj-button id="detailBtn" class="oj-button-sm" data-bind="click:collmonitoring_viewDetail.bind($data)" title="Detail">
+            Detail
+        </oj-button>
+    </td>
+</script>
+<script type="text/html" id="status-template">
+    <td>
+        <div class="task-status oj-text-sm" data-bind="text:status, style: { backgroundColor: status==='ERROR'?'red': (status==='SUCCESS'?'green':'#729fcf')}"></div>
+    </td>
+</script>

@@ -1,0 +1,1 @@
+define(["ojs/ojcore","knockout","jquery"],function(r,e,n){return function(){this.header="500 - Internal Server Error"}});

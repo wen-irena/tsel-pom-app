@@ -1,0 +1,1 @@
+export default class Deferred{constructor(){this._value=void 0,this._resolve=void 0,this._promise=new Promise(e=>{this._resolve=e,this._value&&e(this._value)})}resolve(e){if(this._value)throw new Error("Already resolved.");this._value=e,this._resolve&&this._resolve(e)}toPromise(){return this._promise}};

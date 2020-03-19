@@ -1,0 +1,1 @@
+export function init(){};function identity(t){return t}export{identity as forward};export{identity as inverse};export var names=["longlat","identity"];export default{init:init,forward:identity,inverse:identity,names:names};

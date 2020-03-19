@@ -1,0 +1,1 @@
+export default function(t,e,n,r){return n*=e,e*=e,r[0]*t-n*(r[1]+e*(r[2]+e*(r[3]+e*r[4])))};

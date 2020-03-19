@@ -1,0 +1,1 @@
+export default function(t,n,a,i,e){return t*e-n*Math.sin(2*e)+a*Math.sin(4*e)-i*Math.sin(6*e)};

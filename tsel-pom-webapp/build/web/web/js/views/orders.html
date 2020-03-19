@@ -1,0 +1,449 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<oc-layout-1 id="layoutOrder" has-search-criteria="true" has-bread-crumb="false">
+    <span slot="pageTitleArea">Orders</span>
+    <span slot="breadCrumbArea">Orders</span>
+    <div class="oj-flex-item" slot="searchCriteriaArea">
+        <oj-form-layout label-edge="start" id="form-container" id="form-container">
+            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-2 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchOrder" style="text-align:left">Order ID</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="searchOrder" value="{{orders_searchOrderId}}"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchMSISDN" style="text-align:left">MSISDN</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="searchOrder" value="{{orders_searchCustomerId}}"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label style="text-align:left">Submitted Date</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-date-time id="datepickercontrol" placeholder="Start Date" value="{{orders_startDate}}" max="[[orders_endDate]]" converter="[[orders_dateTimeConverter]]" time-picker='{"timeIncrement":"00:01:00:00"}' style="max-width:175px"> </oj-input-date-time>
+                        to
+                        <oj-input-date-time id="datepickercontrol2" placeholder="End Date" value="{{orders_endDate}}" min="[[orders_startDate]]" converter="[[orders_dateTimeConverter]]" time-picker='{"timeIncrement":"00:01:00:00"}' style="max-width:175px"> </oj-input-date-time>
+                    </div>
+                </div>
+                <!--<oc-dialog id="dialog2" 
+                            init-table-on-load="false" 
+                            dialog-table-columns="[[orders_columns]]"
+                            dialog-query-params="[[dialog_query_params]]"
+                            dialog-table-primary-key="OrderId"
+                            on-select-dialog="[[dialog_output_listener]]"
+                            display-value="[[testValueVar1]]"
+                            value="[[testValueVar2]]"
+                            service-url="[[serviceUrl]]" 
+                             dialog-name="Order Dialog"
+                             label-hint="Order Type">
+                 </oc-dialog>
+                <oj-input-text id="input3" label-hint="Asset Type"></oj-input-text>
+                <oj-input-text id="input3" value="[[testValueVar2]]" label-hint="Purchase Date"></oj-input-text>-->
+            </div>
+        </oj-form-layout>
+        <oj-form-layout label-edge="start" id="form-container" max-columns="2">
+            <div class="oj-flex-item">
+                <oj-button slot="value" on-oj-action="[[orders_onReset]]">Reset</oj-button>
+                <oj-button slot="value" on-oj-action="[[orders_onSearch]]">Search</oj-button>
+            </div>
+        </oj-form-layout>
+    </div>
+
+    <div class="oj-flex-item" slot="searchCriteriaArea">
+        <oj-form-layout label-edge="start" id="form-container" id="form-container" class="oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-2 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchOrderType" style="text-align:left">Order Type</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-select-one id="searchOrderType" options="{{orders_orderTypeLOV}}" value="{{orders_searchOrderType}}" placeholder="Select Order Type..." required="false">
+                        </oj-select-one>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchStatus" style="text-align:left">Status</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-select-one id="searchStatus" options="{{orders_orderStatusLOV}}" value="{{orders_searchStatus}}" placeholder="Select Status..." required="false">
+                        </oj-select-one>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchExtOrderID" style="text-align:left">External ID</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-input-text id="searchExtOrderID" value="{{orders_searchExtOrderID}}"></oj-input-text>
+                    </div>
+                </div>
+
+            </div>
+        </oj-form-layout>
+    </div>
+
+
+    <div slot="tableArea">
+        <div style="position:absolute">
+            <!-- <oc-button id="retryButton" label="Retry" disabled="[[orders_disabledValue() || orders_isReadOnly]]" dialog-name="Retry Task" confirmation-message="Are you sure to retry this order?" confirmation-action="[[order_onRetry]]">
+            </oc-button> -->
+            <oj-button id="retryButton" disabled="[[orders_disabledValue() || orders_isReadOnly]]" on-oj-action="[[order_retry]]"> Retry </oj-button>            
+            <!-- <oc-button id="cancelButton" label="Cancel" disabled="[[orders_disabledValue()||orders_isReadOnly]]" dialog-name="Cancel Task" confirmation-message="Are you sure to cancel this order?" confirmation-action="[[order_onCancel]]">
+            </oc-button> -->
+            <oj-button style="display:none;" id="cancelButton" disabled="[[orders_disabledValue() || orders_isReadOnly]]" on-oj-action="[[order_cancel]]"> Cancel </oj-button>         
+        </div>
+        <oc-table id="ordersTable" columns="[[orders_columns]]" data="[[orders_datasource]]" display="[[orders_display]]" columns-default="[[orders_columnsDefault]]" scroll-policy="[[orders_scrollPolicy]]" scroll-policy-options="[[orders_scrollPolicyOptions]]"
+            root-attributes="[[orders_rootAttributes]]" slot="colDisp pagination">
+            <span slot="fetchSizeArea">
+                    <span>Fetch Size: </span>
+            <oj-select-one id="basicSelect" value="{{orders_fetchSize}}" style="max-width:1.3em">
+                <oj-option value="-1">All</oj-option>
+                <oj-option value="10">10</oj-option>
+                <oj-option value="25">25</oj-option>
+                <oj-option value="50">50</oj-option>
+            </oj-select-one>
+            </span>
+        </oc-table>
+
+    </div>
+    <div slot="dialogWrapper">
+        <oj-dialog style="display:none; min-width:40%;" id="confirmationDialog" title="Confirmation Dialog">
+            <div slot="header">
+                <span id="dialog-title-id" class="oj-dialog-title">Confirmation</span>
+            </div>
+            <div slot="body">
+                <p>Are you sure to Cancel this order?</p>
+            </div>
+            <div slot="footer">
+                <oj-button id="submitButton" data-bind="click: function() {
+                  document.querySelector('#confirmationDialog').close();
+                }"> Yes
+                </oj-button>
+                <oj-button id="cancelButton" data-bind="click: function() {
+                  document.querySelector('#confirmationDialog').close();
+                }"> No
+                </oj-button>
+            </div>
+        </oj-dialog>
+
+        <oj-dialog style="display:none; min-width:70%;" id="msisdnDialog" title="MSISDN Detail">
+            <div slot="header">
+                <span id="dialog-title-id" class="oj-dialog-title">MSISDN Detail</span>
+            </div>
+            <div slot="body">
+                <oj-accordion id="accordionPage">
+                    <oj-collapsible id="c1" expanded>
+                        <span slot="header">Current Offer</span>
+                        <div>
+                            <oc-table id="ordersTable2" columns="[[currentOffer_columns]]" data="[[currentOffer_datasource]]" display="[[currentOffer_display]]" columns-default="[[currentOffer_columnsDefault]]" scroll-policy="[[currentOffer_scrollPolicy]]" scroll-policy-options="[[currentOffer_scrollPolicyOptions]]"
+                                root-attributes="[[currentOffer_rootAttributes]]" slot="pagination">
+                                <!--<span slot="fetchSizeArea">
+                                      <span>Fetch Size: </span>
+                                      <oj-select-one id="basicSelect" value="{{orders_fetchSize}}" style="max-width:1.3em">
+                                          <oj-option value="-1">All</oj-option>
+                                          <oj-option value="10">10</oj-option>
+                                          <oj-option value="25">25</oj-option>
+                                          <oj-option value="50">50</oj-option>
+                                      </oj-select-one>
+                                  </span>-->
+                            </oc-table>
+                        </div>
+                    </oj-collapsible>
+                    <oj-collapsible id="c3">
+                        <span slot="header">Current Collection</span>
+                        <div>
+                            <oc-table id="ordersTable3" columns="[[currentCol_columns]]" data="[[currentCol_datasource]]" display="[[currentCol_display]]" columns-default="[[currentCol_columnsDefault]]" scroll-policy="[[currentCol_scrollPolicy]]" scroll-policy-options="[[currentCol_scrollPolicyOptions]]"
+                                root-attributes="[[currentCol_rootAttributes]]" slot="pagination">
+                                <!--<span slot="fetchSizeArea">
+                                      <span>Fetch Size: </span>
+                                      <oj-select-one id="basicSelect" value="{{orders_fetchSize}}" style="max-width:1.3em">
+                                          <oj-option value="-1">All</oj-option>
+                                          <oj-option value="10">10</oj-option>
+                                          <oj-option value="25">25</oj-option>
+                                          <oj-option value="50">50</oj-option>
+                                      </oj-select-one>
+                                  </span>-->
+                            </oc-table>
+                        </div>
+                    </oj-collapsible>
+                </oj-accordion>
+            </div>
+        </oj-dialog>
+
+        <!-- Payload ORI Dialog -->
+        <oj-dialog style="display:none; min-width:min-content;" id="payloadoriDialog" title="View Payload">
+            <div slot="header">
+                <span id="dialog-title-id" class="oj-dialog-title">View Payload</span>
+            </div>
+            <div slot="body" style="max-height:70%;">
+                <!-- Tab Bar BEGIN -->
+                <div id="demo-container" class="oj-flex demo-edge-top">
+                    <oj-tab-bar id="hnavlist" edge="top" selection="{{selectedItemOrders}}">
+                        <ul>
+                            <li id="ori">
+                                <a href="#" aria-controls="ori-tab-panel" id="ori-tab">
+                                    Payload ORI
+                                </a>
+                            </li>
+                            <li id="updated">
+                                <a href="#" aria-controls="updated-tab-panel" id="updated-tab">
+                                    Payload Updated
+                                </a>
+                            </li>
+                        </ul>
+                    </oj-tab-bar>
+
+                    <oj-switcher value="[[selectedItemOrders]]">
+                        <div slot="ori" id="ori-tab-panel" role="tabpanel" aria-labelledby="ori-tab">
+                            <div class="demo-tab-content">
+                                <textarea id="orders_payloadOri" name="orders_payloadOri" value='[[orders_payloadOri]]'></textarea>
+                            </div>
+                        </div>
+                        <div slot="updated" id="updated-tab-panel" role="tabpanel" aria-labelledby="updated-tab">
+                            <div class="demo-tab-content">
+                                <textarea id="orders_payloadUpdated" name="orders_payloadUpdated" value='[[orders_payloadUpdatedData]]'></textarea>
+                            </div>
+                        </div>
+                    </oj-switcher>
+                </div>
+
+                <!-- Tab Bar END -->
+
+                <!-- <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-collapsible id="c0" expanded="[[orders_payloadOriExpanded]]">
+                            <h3 slot="header"><b>Payload ORI</b></h3>
+                            <textarea id="orders_payloadOri" name="orders_payloadOri" value='[[orders_payloadOri]]'></textarea>
+                        </oj-collapsible>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-collapsible id="c0" expanded="[[orders_payloadUpdatedExpanded]]">
+                            <h3 slot="header"><b>Payload Updated</b></h3>
+                            <textarea id="orders_payloadUpdated" name="orders_payloadUpdated" value='[[orders_payloadUpdatedData]]'></textarea>
+                        </oj-collapsible>
+                    </div>
+                </div> -->
+            </div>
+        </oj-dialog>
+
+        <!-- Retry Dialog BEGIN -->
+        <oj-dialog style="display:none; min-width:800px;" id="retryDialog" title="Retry Dialog">
+            <div slot="header">
+                <span id="dialog-title-id" class="oj-dialog-title">Confirmation Dialog</span>
+            </div>
+            <div slot="body">
+            <p>Are you sure want to retry this order?</p>
+            <oc-table id="ordersRetryTable" columns="[[orders_retryColumns]]" data="[[orders_retryDatasource]]" display="[[orders_display]]" columns-default="[[orders_columnsDefault]]" scroll-policy="[[orders_scrollPolicy]]" scroll-policy-options="[[orders_scrollPolicyOptionsDialog]]"
+            root-attributes="[[orders_rootAttributes]]" slot="pagination">
+            </oc-table>
+            <p>Comment:</p>
+            <oj-text-area id="text-area" style="min-width:770px;" rows="5" value="{{comment}}"></oj-text-area>
+            </div>
+            <div slot="footer">
+                <oj-button id="submitButton" on-oj-action="[[order_onRetry]]"> Yes
+                </oj-button>
+                <oj-button id="cancelButton" data-bind="click: function() {
+                  document.querySelector('#retryDialog').close();
+                }"> No
+                </oj-button>
+            </div>            
+        </oj-dialog>
+        <!-- Retry Dialog END -->
+
+        <!-- Cancel Dialog BEGIN -->
+        <oj-dialog style="display:none; min-width:800px;" id="cancelDialog" title="Cancel Dialog">
+                <div slot="header">
+                    <span id="dialog-title-id" class="oj-dialog-title">Confirmation Dialog</span>
+                </div>
+                <div slot="body">
+                <p>Are you sure want to cancel this order?</p>
+                <oc-table id="ordersCancelTable" columns="[[orders_retryColumns]]" data="[[orders_retryDatasource]]" display="[[orders_display]]" columns-default="[[orders_columnsDefault]]" scroll-policy="[[orders_scrollPolicy]]" scroll-policy-options="[[orders_scrollPolicyOptionsDialog]]"
+                root-attributes="[[orders_rootAttributes]]" slot="pagination">
+                </oc-table>
+                <p>Comment:</p>
+                <oj-text-area id="text-area" style="min-width:770px;" rows="5" value="{{comment}}"></oj-text-area>
+                </div>
+                <div slot="footer">
+                    <oj-button id="submitButton" on-oj-action="[[order_onCancel]]"> Yes
+                    </oj-button>
+                    <oj-button id="cancelButton" data-bind="click: function() {
+                      document.querySelector('#cancelDialog').close();
+                    }"> No
+                    </oj-button>
+                </div>            
+            </oj-dialog>
+            <!-- Cancel Dialog END -->        
+
+    </div>
+</oc-layout-1>
+
+<script type="text/html" id="action-template">
+    <td>
+        <oj-button id="rollbackBtn" class="oj-button-sm" data-bind="click:orders_onClickCancelOrder.bind($data), disable: orderStatus === 'Failed' ?false:true" title="Cancel Order">
+            <i class="fas fa-times fa-xs"></i>
+        </oj-button>
+    </td>
+</script>
+
+<script type="text/html" id="selection-template-header">
+    <th align="center" style="padding-left: 15px; width:35px;">
+        <div id="checkboxset" data-bind="ojComponent: {component: 'ojCheckboxset'}">
+            <input id="cbAll" class="cbAll" type="checkbox" data-bind="ojComponent: {component: 'ojCheckboxset'},disable: orders_isReadOnly(), click: function(data, event){orders_onSelectAll(data,event); return true;}" />
+        <div>
+    </th>
+</script>
+
+<script type="text/html" id="selection-template">
+    <td>
+        <oj-bind-if test="[[$data.orderStatus === 'Failed']]">
+        <div id="checkboxset" data-bind="ojComponent: {component: 'ojCheckboxset'}">
+            <input class="cbRow" type="checkbox" data-bind="ojComponent: {component: 'ojCheckboxset'}, attr: {id: 'cbOrder_' + $data.sbOrderId}, checked:$data.isChecked, disable: ($data.orderStatus === 'Failed' ? false:true) || orders_isReadOnly, value:orderId, click: function(data, event){orders_onSelect(data,event); return true;}"
+            />
+         </div>
+        </oj-bind-if>
+    </td>
+</script>
+
+<script type="text/html" id="orders-audit-template">
+    <td>
+        <div>
+            <b>Created By :</b>
+            <oj-bind-text value="[[createdBy]]"></oj-bind-text>
+        </div>
+        <div>
+            <b>Last Updated By :</b>
+            <oj-bind-text value="[[updatedBy]]"></oj-bind-text>
+        </div>
+        <div>
+            <b>Created Date :</b>
+            <oj-bind-text value="{{orders_dateTimeRenderer2(createdDate)}}"></oj-bind-text>
+        </div>
+        <div>
+            <b>Updated Date :</b>
+            <oj-bind-text value="{{orders_dateTimeRenderer2(updatedDate)}}"></oj-bind-text>
+        </div>
+    </td>
+</script>
+
+<script type="text/html" id="orders-massrequest">
+    <td>
+        <div>
+            <b>Ext. ID :</b>
+            <oj-bind-text value="[[extOrderId]]"></oj-bind-text>
+        </div>
+        <div>
+            <b>Op. Code :</b>
+            <oj-bind-text value="[[operationCode]]"></oj-bind-text>
+        </div>
+        <div>
+            <b>Filename :</b>
+            <oj-bind-text value="[[fileName]]"></oj-bind-text>
+        </div>
+    </td>
+</script>
+
+
+<script type="text/html" id="orders-template">
+    <td style="width:100%;">
+        <div style="min-width:280px" class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout">
+            <div class="oj-flex-item">
+                <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-6">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item ">
+                            <label id="A1control"><b>Order ID</b></label>
+                        </div>
+                        <div class="oj-flex-item ">
+                            <div class="oj-form-non-control" aria-labelledby="A1control">
+                                :
+                                <a class="hyperlink-1" title="View Task" href="javascript:void(0)" id="orderclick" data-bind="text: [[orderId]], click:orders_viewTask.bind($data)"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label id="A2control"><b>Order Type</b></label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <div class="oj-form-non-control" aria-labelledby="A3control">
+                                :
+                                <oj-bind-text class="oj-form-non-control" value="[[orderType]]"></oj-bind-text>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label id="A4control"><b>Sales Ch.</b></label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <div class="oj-form-non-control" aria-labelledby="A4control">
+                                :
+                                <oj-bind-text value="[[salesChannel]]"></oj-bind-text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label id="A5control"><b>MSISDN</b></label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <div class="oj-form-non-control" aria-labelledby="A5control">
+                                :
+                                <a class="hyperlink-1" title="View MSISDN Detail" href="javascript:void(0)" id="msisdnclick" data-bind="text: [[msisdn]], click:order_viewMSISDN.bind($data)"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-flex-item">
+                <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-6 oj-md-labels-inline">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label id="A4label"></label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <div class="oj-form-non-control" aria-labelledby="A4label">
+                                <div class="task-status oj-text-sm" data-bind="text:orderStatus, style: { backgroundColor: orderStatus==='Failed'?'red': (orderStatus==='Completed'?'#68c182':(orderStatus==='Submitted'?'#237bb1':(orderStatus==='Cancelled'?'#8561c8':'#fbce4a')))}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <label id="B2control"></label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <div class="oj-form-non-control" aria-labelledby="B2control">
+                                <a class="hyperlink-1 oj-text-sm" title="View Payload ORI" href="javascript:void(0)" id="payloadoriclick" data-bind="text: 'Payload', click:orders_viewPayloadori.bind($data)"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <oj-bind-if test="[[foId !== null]]">
+                        <div class="oj-flex" id="falloutID">
+                            <div class="oj-flex-item">
+                                <label id="A9control"><b>Fallout ID</b></label>
+                            </div>
+                            <div class="oj-flex-item">
+                                <div class="oj-form-non-control" aria-labelledby="A9control">
+                                    :
+                                    <a class="hyperlink-1" title="View FoId Detail" href="javascript:void(0)" id="foIdclick" data-bind="text: [[foId]], click:orders_viewFoId.bind($data)"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </oj-bind-if>
+                </div>
+            </div>
+        </div>
+    </td>
+</script>

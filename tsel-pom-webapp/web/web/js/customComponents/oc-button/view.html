@@ -1,0 +1,23 @@
+<oj-button display='icons' on-oj-action="[[onOpenDialog]]" disabled="[[$properties.disabled]]" data-bind="attr: {id: 'confirmBtn_'+$properties.id, title: $properties.dialogName}, css: $properties.class">
+    <oj-bind-if test="[[$properties.iconClass]]">
+        <i data-bind="css: $properties.iconClass"></i>
+    </oj-bind-if>
+    <oj-bind-if test="[[$properties.label]]">
+        <span data-bind="text:[[$properties.label]]"></span>
+    </oj-bind-if>
+</oj-button>
+
+<oj-dialog style="display:none;width:40%;height:auto !important;max-height: calc(200vh - 340px) !important;" data-bind="attr: {id: 'dlgModalConfirm_'+$properties.id , title: $properties.dialogName }">
+    <div slot="header">
+        <span id="dialog-title-id" class="oj-dialog-title">Confirmation</span>
+    </div>
+    <div slot="body">
+        <p><span data-bind="text: $properties.confirmationMessage"></span></p><br />
+        <p>Comment:</p>
+        <oj-text-area id="text-area" style="min-width:80%;" rows="5" value="{{comment}}"></oj-text-area>
+    </div>
+    <div slot="footer">
+        <oj-button on-oj-action="[[onConfirmYes]]">Yes</oj-button>
+        <oj-button on-oj-action="[[closeDialog]]">No</oj-button>
+    </div>
+</oj-dialog>

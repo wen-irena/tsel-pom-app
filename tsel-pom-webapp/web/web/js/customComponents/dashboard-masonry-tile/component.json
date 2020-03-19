@@ -1,0 +1,16 @@
+{
+    "name": "masonry-tile",
+    "description": "A masonry tile element with tile size determined on runtime based on the content.",
+    "version": "1.0.0",
+    "jetVersion": ">=4.0.0 <5.0.0",
+    "properties": {
+      "content": {
+        "description": "Masonry tile content.",
+        "type": "application/json"
+      },
+      "index": {
+        "description": "Masonry tile index.",
+        "type": "integer"
+      }
+    }
+  }

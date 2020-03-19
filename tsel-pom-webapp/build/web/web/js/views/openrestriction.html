@@ -1,0 +1,59 @@
+<oc-layout-1 id="layoutOrder" has-search-criteria="false" has-bread-crumb="false">
+    <span slot="pageTitleArea">Open Restriction</span>
+    <div slot="tableArea">
+        <oj-form-layout label-edge="start" id="form-container" id="form-container" class="oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-1 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchOrder" style="text-align:left">Upload CSV File</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input type="file" id="browseFile" value="Browse File" style="position: fixed; top: -100em" onchange="onChangeFile()" />
+                        <oj-input-text id="browseFile" placeholder="No file chosen" value="[[openres_fileName]]" disabled></oj-input-text>
+                        <oj-button id="browseButton" on-oj-action="[[openres_onBrowse]]">Browse</oj-button>
+                        <oj-button id="submitButton" on-oj-action="[[openres_onUpload]]">Upload</oj-button>
+                        <div style="float:right;">
+                            <oj-button id="downloadButton" on-oj-action="[[openres_onDownloadTemplate]]">Download Template</oj-button>
+                        </div>
+                        <!-- <iframe id="my_iframe" style="display:none;"></iframe> -->
+                    </div>
+                </div>
+            </div>
+        </oj-form-layout>
+        <br />
+        <div id="tableRetry">
+            <div style="position:absolute;">
+                <oj-button id="retryButton" on-oj-action="[[openres_onRetry]]" disabled="[[openres_disabledOpenRestriction]]">Open Restriction</oj-button>
+                <oj-button id="clearButton" on-oj-action="[[openres_onClearAll]]">Clear All Data</oj-button>
+            </div>
+            <oc-table id="massOrderTable" columns="[[openres_columns]]" data="[[openres_datasource]]" display="[[openres_display]]" columns-default="[[openres_columnsDefault]]" scroll-policy="[[openres_scrollPolicy]]" scroll-policy-options="[[openres_scrollPolicyOptions]]"
+                root-attributes="[[openres_rootAttributes]]" slot="colDisp pagination">
+                <span slot="fetchSizeArea">
+                        <span>Fetch Size: </span>
+                <oj-select-one id="basicSelect" value="{{openres_fetchSize}}" style="max-width:1.3em">
+                    <oj-option value="-1">All</oj-option>
+                    <oj-option value="10">10</oj-option>
+                    <oj-option value="25">25</oj-option>
+                    <oj-option value="50">50</oj-option>
+                </oj-select-one>
+                </span>
+            </oc-table>
+        </div>
+    </div>
+</oc-layout-1>
+
+<script type="text/html" id="action-template-header">
+    <th align="center" style="padding-left: 15px; width:35px;">
+        <div id="checkboxset" data-bind="ojComponent: {component: 'ojCheckboxset'}">
+            <input id="cbAll" type="checkbox" data-bind="ojComponent: {component: 'ojCheckboxset'}, click: function(data, event){openres_onSelectAll(data,event); return true;}" />
+            <div>
+    </th>
+</script>
+<script type="text/html" id="action-template-detail">
+    <td align="center" style="padding-left: 15px; width:35px;">
+        <div id="checkboxset" data-bind="ojComponent: {component: 'ojCheckboxset'}">
+            <input class="cbRow" type="checkbox" data-bind="ojComponent: {component: 'ojCheckboxset'}, attr: {id: 'cbOrder_' + $data.sbOrderId}, checked:$data.isChecked, value:msisdn, click: function(data, event){openres_onSelect(data,event); return true;}" />
+            <div>
+    </td>
+</script>
+</script>

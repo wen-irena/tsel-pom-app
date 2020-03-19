@@ -1,0 +1,1 @@
+export default function(a,t){a=Math.abs(a),t=Math.abs(t);var h=Math.max(a,t),M=Math.min(a,t)/(h||1);return h*Math.sqrt(1+Math.pow(M,2))};

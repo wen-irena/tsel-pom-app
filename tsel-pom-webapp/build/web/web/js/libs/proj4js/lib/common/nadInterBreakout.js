@@ -1,0 +1,1 @@
+export default function(e,r,i,f,t){var n;if(e[i]<0){if(!(-1===e[i]&&r[i]>.99999999999))return!1;e[i]++,r[i]=0}else if((n=e[i]+1)>=t.lim[f]){if(!(n===t.lim[f]&&r[i]<1e-11))return!1;"x"===i?e[i]--:e[i]++,r[i]=1}return[e,r]};

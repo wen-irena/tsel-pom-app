@@ -1,0 +1,1 @@
+import pj_mlfn from"./pj_mlfn";import{EPSLN}from"../constants/values";var MAX_ITER=20;export default function(r,t,a){for(var n=1/(1-t),f=r,o=MAX_ITER;o;--o){var m=Math.sin(f),s=1-t*m*m;if(f-=s=(pj_mlfn(f,m,Math.cos(f),a)-r)*(s*Math.sqrt(s))*n,Math.abs(s)<EPSLN)return f}return f};

@@ -1,0 +1,446 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<oc-layout-1 id="layoutOrder" has-search-criteria="false" has-bread-crumb="true">
+    <span slot="pageTitleArea">Tasks</span>
+    <span slot="breadCrumbArea">
+        <a href="javascript:void(0)" data-bind="click: workorders_backOrder">Order (<span data-bind="text:workorders_paramOrderId"></span>)</a>
+    <span>></span>
+    <span>Tasks</span>
+
+    <div style="float:right;">
+        <oj-button on-oj-action="[[workorders_viewPayloadori]]">Payload</oj-button>
+        <oc-button id="woRetryBtn" label="Retry" disabled="[[workorders_disabledValue() || workorders_isReadOnly]]" dialog-name="Retry Task" confirmation-message="Are you sure to retry this order?" confirmation-action="[[workorders_retry]]">
+        </oc-button>
+        <oc-button style="display:none;" id="woCancelBtn" label="Cancel" disabled="[[workorders_disabledValue() || workorders_isReadOnly]]" dialog-name="Cancel Task" confirmation-message="Are you sure to cancel this order?" confirmation-action="[[workorders_cancel]]">
+        </oc-button>
+        <oj-button on-oj-action="[[workorders_backOrder]]">Back</oj-button>
+    </div>
+    </span>
+
+
+    <div class="oj-flex-item" slot="searchCriteriaArea">
+        <oj-form-layout label-edge="start" id="form-container" class="oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-2 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="searchStatus" style="text-align:left">Status</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-select-one id="searchStatus" options="{{workorders_statusLOV}}" value="{{workorders_status}}" placeholder="Select Status..." required="false">
+                        </oj-select-one>
+                    </div>
+                </div>
+            </div>
+        </oj-form-layout>
+        <oj-form-layout label-edge="start" id="form-container" max-columns="2">
+            <div class="oj-flex-item">
+                <oj-button slot="value" on-oj-action="[[workorders_onReset]]">Reset</oj-button>
+                <oj-button slot="value" on-oj-action="[[workorders_onSearch]]">Search</oj-button>
+            </div>
+        </oj-form-layout>
+    </div>
+
+    <div slot="tableArea">
+        <oj-collapsible id="c0" expanded="true">
+            <h3 slot="header" class="oj-header-border"><b>Order Information</b></h3>
+
+            <div class="oj-flex-item">
+                <div class="oj-panel oj-panel-alt1">
+                    <div class="oj-flex oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 oj-form-layout">
+
+                        <div class="oj-flex-item">
+                            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4">
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label id="A1control">Order</label>
+                                        <div class="oj-form-non-control" aria-labelledby="A1control">
+                                            <b><oj-bind-text class="oj-form-non-control" value="[[data_orderId]]"></oj-bind-text>
+                                            (<oj-bind-text class="oj-form-non-control" value="[[data_orderType]]"></oj-bind-text>)</b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label id="A2control">Status</label>
+                                        <div class="oj-form-non-control" aria-labelledby="A3control">
+                                            <b><oj-bind-text class="oj-form-non-control" value="[[data_orderStatus]]"></oj-bind-text></b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label id="A5control">MSISDN</label>
+                                        <div class="oj-form-non-control" aria-labelledby="A5control">
+                                            <b><oj-bind-text class="oj-form-non-control" value="[[data_msisdn]]"></oj-bind-text></b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label id="A4control">Sales Channel</label>
+                                        <div class="oj-form-non-control" aria-labelledby="A4control">
+                                            <b><oj-bind-text value="[[data_salesChannel]]"></oj-bind-text></b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="oj-flex-item">
+                            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label id="A4control">Conversation ID</label>
+                                        <div class="oj-form-non-control" aria-labelledby="A4control">
+                                            <b><oj-bind-text value="[[data_integrationId]]"></oj-bind-text></b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label id="A4control">Submitted Date</label>
+                                        <div class="oj-form-non-control" aria-labelledby="A4control">
+                                            <b><oj-bind-text value="[[data_submittedDate]]"></oj-bind-text></b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label id="A4control">Completion Date</label>
+                                        <div class="oj-form-non-control" aria-labelledby="A4control">
+                                            <b><oj-bind-text value="[[data_completionDate]]"></oj-bind-text></b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label id="A4control">Service Type</label>
+                                        <div class="oj-form-non-control" aria-labelledby="A4control">
+                                            <b><oj-bind-text value="[[data_serviceType]]"></oj-bind-text></b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="oj-flex-item">
+                            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4">
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label id="A4control">Ext. ID</label>
+                                        <div class="oj-form-non-control" aria-labelledby="A4control">
+                                            <b><oj-bind-text value="[[data_extOrderId]]"></oj-bind-text></b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label id="A4control">Operation Code</label>
+                                        <div class="oj-form-non-control" aria-labelledby="A4control">
+                                            <b><oj-bind-text value="[[data_operationCode]]"></oj-bind-text></b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label id="A4control">Filename</label>
+                                        <div class="oj-form-non-control" aria-labelledby="A4control">
+                                            <b><oj-bind-text value="[[data_fileName]]"></oj-bind-text></b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-flex">
+                                    <div class="oj-flex-item">
+                                        <label id="A4control">Reason</label>
+                                        <div class="oj-form-non-control" aria-labelledby="A4control">
+                                            <b><oj-bind-text value="[[data_reason]]"></oj-bind-text></b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </oj-collapsible>
+    </div>
+
+    <hr class="style-six">
+
+    <div slot="tableArea">
+        <oj-collapsible id="c0" expanded="true">
+            <h3 slot="header" class="oj-header-border"><b>Tasks</b></h3>
+            <div>
+                <!-- <div style="position:absolute;"> -->
+                <!-- <oj-button slot="value" on-oj-action="[[workorders_retry]]" disabled="[[workorders_disabledValue]]">Retry</oj-button>
+                    <oj-button slot="value" on-oj-action="[[workorders_cancel]]" disabled="[[workorders_disabledValue]]">Cancel</oj-button> -->
+                <!-- <oc-button id="woRetryBtn" label="Retry" disabled="[[workorders_disabledValue]]" dialog-name="Retry Task" confirmation-message="Are you sure to retry this order?" confirmation-action="[[workorders_retry]]">
+                    </oc-button>
+                    <oc-button id="woCancelBtn" label="Cancel" disabled="[[workorders_disabledValue]]" dialog-name="Cancel Task" confirmation-message="Are you sure to cancel this order?" confirmation-action="[[workorders_cancel]]">
+                    </oc-button> -->
+                <!-- </div> -->
+                <oc-table id="workordersTable" columns="[[workorders_columns]]" data="[[workorders_datasource]]" display="[[workorders_display]]" columns-default="[[workorders_columnsDefault]]" scroll-policy="[[workorders_scrollPolicy]]" scroll-policy-options="[[workorders_scrollPolicyOptions]]"
+                    root-attributes="[[workorders_rootAttributes]]" slot="colDisp pagination">
+                    <span slot="fetchSizeArea">
+                            <span>Fetch Size: </span>
+                    <oj-select-one id="basicSelect" value="{{workorders_fetchSize}}" style="max-width:1.3em">
+                        <oj-option value="-1">All</oj-option>
+                        <oj-option value="10">10</oj-option>
+                        <oj-option value="25">25</oj-option>
+                        <oj-option value="50">50</oj-option>
+                    </oj-select-one>
+                    </span>
+                </oc-table>
+            </div>
+        </oj-collapsible>
+
+    </div>
+
+    <!--<div slot="tableArea">
+        <oj-collapsible id="c1" expanded="false">
+            <h3 slot="header" class="oj-header-border"><b>Offer List</b></h3>
+            <div>
+                <oc-table id="ordersTable2" columns="[[offerList_columns]]" data="[[offerList_datasource]]" display="[[offerList_display]]" columns-default="[[offerList_columnsDefault]]" scroll-policy="[[offerList_scrollPolicy]]" scroll-policy-options="[[offerList_scrollPolicyOptions]]"
+                    root-attributes="[[offerList_rootAttributes]]" slot="pagination">
+                </oc-table>
+            </div>
+        </oj-collapsible>
+    </div>-->
+
+    <!--<div slot="tableArea">
+        <oj-collapsible id="c3" expanded="false">
+            <h3 slot="header" class="oj-header-border"><b>Collection Info</b></h3>
+            <div class="oj-flex-item">
+                <div class="oj-panel oj-panel-alt1">
+                    <div>
+                        <span><b>REQUEST STATUS : </b></span>
+                    </div>
+                    <div>
+                        <span><b>RETRY ATTEMPT LEFT : </b></span>
+                    </div>
+                    <div>
+                        <span><b>IO : </b></span>
+                    </div>
+                </div>
+            </div>
+        </oj-collapsible>
+    </div>-->
+
+
+    <div slot="dialogArea">
+        <oj-dialog style="display:none; min-width:70%; height: 80vh;" id="payloadDialog" title="Retry with Payload" cancelBehavior="icon" modality="modal">
+            <div slot="body" style="max-height:70%;">
+                <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-2 oj-md-labels-inline">
+                    <div class="oj-flex">
+                        <div class="oj-flex-item">
+                            <oj-label for="searchEvent" style="text-align:left">Event Type</oj-label>
+                        </div>
+                        <div class="oj-flex-item">
+                            <oj-select-one id="searchEvent" options="{{workorders_eventTypeLOV}}" value="{{workorders_eventType}}" required="false" on-value-changed="[[workorders_eventTypeChange]]">
+                            </oj-select-one>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <textarea id="retryWithPayloadEditor" name="retryWithPayloadEditor" value='[[data_payloadRetryWithPayload]]'></textarea>
+                </div>
+            </div>
+            <div slot="footer">
+                <oc-button id="updateDialogBtn" label="Update" dialog-name="Update Task" confirmation-message="Are you sure to update this order?" confirmation-action="[[workorders_onSaveRetry]]" disabled="[[workorders_isReadOnly]]">
+                </oc-button>
+                <oc-button id="woRetryBtn" label="Retry" dialog-name="Retry Task" confirmation-message="Are you sure to retry this order?" confirmation-action="[[workorders_retry]]" disabled="[[workorders_isReadOnly]]">
+                </oc-button>
+            </div>
+        </oj-dialog>
+    </div>
+
+    <!-- Payload ORI Dialog -->
+    <oj-dialog style="display:none; min-width:70%; height: 80vh;" id="tasksPayloadoriDialog" title="View Payload ORI">
+        <div slot="header">
+            <span id="dialog-title-id" class="oj-dialog-title">View Payload</span>
+        </div>
+        <div slot="body" style="max-height:70%;">
+
+            <!-- Tab Bar BEGIN -->
+            <div class="oj-flex">
+                <oj-tab-bar id="hnavlist" edge="top" selection="{{selectedItemOrders}}">
+                    <ul>
+                        <li id="ori">
+                            <a href="#" aria-controls="ori-tab-panel" id="ori-tab">
+                                Payload ORI
+                            </a>
+                        </li>
+                        <li id="updated">
+                            <a href="#" aria-controls="updated-tab-panel" id="updated-tab">
+                                Payload Updated
+                            </a>
+                        </li>
+                    </ul>
+                </oj-tab-bar>
+            </div><br/>
+
+            <div class="oj-flex">
+                <oj-switcher value="[[selectedItemOrders]]">
+                    <div slot="ori" id="ori-tab-panel" role="tabpanel" aria-labelledby="ori-tab">
+                        <div class="demo-tab-content">
+                            <textarea id="tasks_payloadOriginal" name="tasks_payloadOriginal" value='[[data_payloadOri]]'></textarea>
+                        </div>
+                    </div>
+                    <div slot="updated" id="updated-tab-panel" role="tabpanel" aria-labelledby="updated-tab">
+                        <div class="demo-tab-content">
+                            <textarea id="tasks_payloadUpdated" name="tasks_payloadUpdated" value='[[data_payloadUpdated]]'></textarea>
+                        </div>
+                    </div>
+                </oj-switcher>
+            </div>
+
+            <!-- Tab Bar END -->
+        </div>
+    </oj-dialog>
+
+</oc-layout-1>
+
+<div id="dialogWrapper">
+    <oj-dialog style="display:none; min-width:40%;" id="confirmationDialog" title="Confirmation">
+        <div slot="header">
+            <span id="dialog-title-id" class="oj-dialog-title">Confirmation</span>
+        </div>
+        <div slot="body">
+            <p>Are you sure to process this action?</p>
+        </div>
+        <div slot="footer">
+            <oj-button id="yesButton" data-bind="click: function() {
+            document.querySelector('#confirmationDialog').close();
+          }">Yes
+            </oj-button>
+            <oj-button id="noButton" data-bind="click: function() {
+            document.querySelector('#confirmationDialog').close();
+          }">No
+            </oj-button>
+        </div>
+    </oj-dialog>
+</div>
+
+<script type="text/html" id="workorderid">
+    <td>
+        <a title="View Fallout" href="javascript:void(0)" id="workorderLink" data-bind="text: [[actId]], click:workorders_viewFallout.bind($data)"></a>
+    </td>
+</script>
+
+<script type="text/html" id="action-header-template">
+    <th>
+        <span>Actions</span>
+    </th>
+</script>
+<script type="text/html" id="sequence-template">
+    <td>
+        <oj-row-expander context='[[$context.rowContext]]'></oj-row-expander>
+        <span data-bind="text: [[$data.sequence]]"></span>
+    </td>
+</script>
+<script type="text/html" id="action-template">
+    <td>
+        <div style="height:100%; vertical-align: middle;">
+            <div>
+                <!--<oj-button class="oj-button-sm" id="fcBtn" data-bind="click:workorders_forceComplete.bind($data), disable:status==='Failed'?false:true" title="Force Complete" >
+                    <i class="fas fa-check-double fa-xs"></i>
+                </oj-button>-->
+                <!--<oj-button class="oj-button-sm" id="retryBtn" data-bind="click:workorders_retry.bind($data), disable:status==='Failed'?false:true" title="Retry" >
+                    <i class="fas fa-undo fa-xs"></i>
+                </oj-button>-->
+                <oc-button id="[['woFCBtn_'+$data.actId]]" class="oj-button-sm" icon-class="fas fa-check-double fa-xs" disabled="[[($data.status==='Failed'?false:true) || workorders_isReadOnly]]" dialog-name="Force Complete Task" confirmation-message="Are you sure to force complete this task?"
+                    data="[[$data]]" confirmation-action="[[workorders_forceComplete]]">
+                </oc-button>
+                <oj-button class="oj-button-sm" id="rpBtn" on-oj-action="[[workorders_retryPayload]]" disabled="[[($data.status==='Failed'?false:true) || workorders_isReadOnly]]" title="Retry with Payload" label='Force Complete'>
+                    <i class="fas fa-code fa-xs"></i>
+                </oj-button>
+                <!-- <oc-button id="[['woRetryBtn_'+$data.actId]]" class="oj-button-sm" icon-class="fas fa-code fa-xs" disabled="[[$data.status==='Failed'?false:true]]" dialog-name="Retry Task" confirmation-message="Are you sure to retry this task?" data="[[$data]]" confirmation-action="[[workorders_retryPayload]]">
+                </oc-button> -->
+            </div>
+            <div>
+                <!--<oj-button class="oj-button-sm" id="rpBtn" data-bind="click: workorders_retryPayload.bind($data), disable:status==='Failed'?false:true" title="Retry with Payload">
+                    <i class="fas fa-code fa-xs"></i>
+                </oj-button>-->
+                <!--<oj-button class="oj-button-sm" id="rollbackBtn" data-bind="click:workorders_rollbackTask.bind($data), disable:status==='Failed'?false:true" title="Rollback Task">
+                    <i class="fas fa-calendar-times fa-xs"></i>
+                </oj-button>-->
+            </div>
+        </div>
+    </td>
+</script>
+<script type="text/html" id="task-status-template">
+    <td>
+        <div class="task-status oj-text-sm" data-bind="text:status, style: { backgroundColor: status==='Failed'?'red': (status==='Complete'?'green':'#729fcf')}"></div>
+    </td>
+</script>
+<script type="text/html" id="task-template">
+    <td>
+        <span data-bind="text:task" style="color: grey; font-weight: bold"></span>
+        <div>
+            Action Type : <span data-bind="text:actType"></span>
+        </div>
+        <div>
+            Service : <span data-bind="text:service"></span>
+        </div>
+        <div>
+            Operation : <span data-bind="text:operation"></span>
+        </div>
+        <div>
+            Logical/Dest : <span data-bind="text:destinationLogical"></span>
+        </div>
+    </td>
+</script>
+<script type="text/html" id="task-timestamp-template">
+    <td>
+        <div>Start Time:
+            <oj-bind-text value="{{startTime?workorders_dateTimeRenderer2(startTime):'-'}}"></oj-bind-text>
+        </div>
+        <div>End Time :
+            <oj-bind-text value="{{endTime?workorders_dateTimeRenderer2(endTime):'-'}}"></oj-bind-text>
+        </div>
+    </td>
+</script>
+<script type="text/html" id="task-fallout-template">
+    <td>
+        <oj-bind-if test="[[foId]]">
+            <div>
+                Fallout ID :
+                <a title="View Fallout" href="javascript:void(0)" id="workorderLink" data-bind="text:[[foId]], click:workorders_viewFallout.bind($data)"></a>
+            </div>
+            <div>
+                Error Status : <span data-bind="text:falloutstatus"></span>
+            </div>
+            <div style="max-width:400px; word-wrap:break-word;white-space: initial;">
+                Error Message : <span data-bind="text:fomsg"></span>
+            </div>
+        </oj-bind-if>
+        <oj-bind-if test="[[!foId]]">
+            <div>
+                N/A
+            </div>
+        </oj-bind-if>
+    </td>
+</script>
+<script type="text/html" id="task-audit-template">
+    <td>
+        <div>
+            Created By :
+            <oj-bind-text value="[[createdBy?createdBy:'-']]"></oj-bind-text>
+        </div>
+        <div>
+            Created Date :
+            <oj-bind-text value="{{createdDate?workorders_dateTimeRenderer2(createdDate):'-'}}"></oj-bind-text>
+        </div>
+        <div>
+            Updated By :
+            <oj-bind-text value="[[updatedBy?updatedBy:'-']]"></oj-bind-text>
+        </div>
+        <div>
+            Updated Date :
+            <oj-bind-text value="{{updatedDate?workorders_dateTimeRenderer2(updatedDate):'-'}}"></oj-bind-text>
+        </div>
+    </td>
+</script>

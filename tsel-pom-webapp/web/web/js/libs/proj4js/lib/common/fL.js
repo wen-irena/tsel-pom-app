@@ -1,0 +1,1 @@
+import{HALF_PI}from"../constants/values";export default function(t,a){return 2*Math.atan(t*Math.exp(a))-HALF_PI};

@@ -1,0 +1,1 @@
+export default function(t){return.05859375*t*t*(1+.75*t)};

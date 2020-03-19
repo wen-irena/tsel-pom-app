@@ -1,0 +1,1 @@
+define(["knockout","jquery"],function(n,u){return function(n){}});

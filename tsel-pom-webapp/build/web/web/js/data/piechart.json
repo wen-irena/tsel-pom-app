@@ -1,0 +1,16 @@
+{
+    "data": [
+                {
+                    "name": "Series 1", 
+                    "items": [42]
+                },
+                {
+                    "name": "Series 2", 
+                    "items": [28]
+                },
+                {
+                    "name": "Series 3", 
+                    "items": [56]
+                }
+            ]
+}

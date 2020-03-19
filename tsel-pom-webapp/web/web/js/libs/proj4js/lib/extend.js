@@ -1,0 +1,1 @@
+export default function(r,n){var t,e;if(r=r||{},!n)return r;for(e in n)void 0!==(t=n[e])&&(r[e]=t);return r};

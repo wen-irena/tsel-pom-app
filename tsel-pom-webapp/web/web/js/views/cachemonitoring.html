@@ -1,0 +1,123 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+    <h3 class="oj-header-border"><b>CACHE MONITORING</b> <oj-button on-oj-action="[[cacheMonitoring_refreshData]]"><i class="fas fa-redo"></i></oj-button></h3>
+    <br />
+    <div class="oj-flex oj-flex-items-pad">
+        <div class="oj-flex-item">
+            <div class="oj-panel oj-sm-flex-items-initial  oj-md-align-items-center" style="min-height:500px; width: 1px; min-width: 100%; overflow-x: auto; padding-top: 30px;">
+                <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center oj-sm-align-items-center  oj-sm-flex-wrap-nowrap oj-md-flex-items-initial oj-md-justify-content-center oj-md-align-items-center  oj-md-flex-wrap-nowrap oj-lg-flex-items-initial oj-lg-justify-content-center oj-lg-align-items-center  oj-lg-flex-wrap-nowrap">
+                    <div class="oj-flex-item" align="center">
+                        <h5><b>DATABASE</b></h5>
+                        <span class="database-icon" title="EPC dumped to database"></span><br/>
+                        <oj-bind-if test="[[cacheMonitoring_iconDatabase() === 'success']]">
+                            <span class="oj-icon-circle oj-icon-xxs">
+                              <span class="oj-icon-circle-inner" style="background-color:#81ba5f; margin:10px;">
+                                  <i class="fas fa-check"></i>
+                              </span>
+                            </span>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[cacheMonitoring_iconDatabase() === 'error']]">
+                            <span class="oj-icon-circle oj-icon-xxs">
+                              <span class="oj-icon-circle-inner" style="background-color:#de2333; margin:10px;">
+                                  <i class="fas fa-times"></i>
+                              </span>
+                            </span>
+                        </oj-bind-if>  
+                        <oj-bind-if test="[[cacheMonitoring_iconDatabase() === 'wait' || cacheMonitoring_iconDatabase() === '' || cacheMonitoring_iconDatabase() === null ]]">
+                            <span class="oj-icon-circle oj-icon-xxs">
+                              <span class="oj-icon-circle-inner" style="background-color:#f6b846; margin:10px;">
+                                  <i class="fas fa-minus"></i>
+                              </span>
+                            </span>
+                        </oj-bind-if>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div style="display: inline-block; white-space: nowrap; margin: 0px 30px 0px 30px;">
+                            <i class="fas fa-caret-right fa-3x" style="display: inline-block; color: grey;"></i>
+                            <i class="fas fa-caret-right fa-3x" style="display: inline-block; color: grey;"></i>
+                            <i class="fas fa-caret-right fa-3x" style="display: inline-block; color: grey;"></i>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item" align="center">
+                        <h5><b>SCHEDULER</b></h5>
+                        <span class="scheduler-icon"></span><br/>
+                        <oj-bind-if test="[[cacheMonitoring_iconScheduler() === 'success']]">
+                            <span class="oj-icon-circle oj-icon-xxs">
+                              <span class="oj-icon-circle-inner" style="background-color:#81ba5f; margin:10px;">
+                                  <i class="fas fa-check"></i>
+                              </span>
+                            </span>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[cacheMonitoring_iconScheduler() === 'error']]">
+                            <span class="oj-icon-circle oj-icon-xxs">
+                              <span class="oj-icon-circle-inner" style="background-color:#de2333; margin:10px;">
+                                  <i class="fas fa-times"></i>
+                              </span>
+                            </span>
+                        </oj-bind-if>  
+                        <oj-bind-if test="[[cacheMonitoring_iconScheduler() === 'wait' || cacheMonitoring_iconScheduler() === '' || cacheMonitoring_iconScheduler() === null ]]">
+                            <span class="oj-icon-circle oj-icon-xxs">
+                              <span class="oj-icon-circle-inner" style="background-color:#f6b846; margin:10px;">
+                                  <i class="fas fa-minus"></i>
+                              </span>
+                            </span>
+                        </oj-bind-if>
+                    </div>
+                    <div class="oj-flex-item">
+                        <div style="display: inline-block; white-space: nowrap; margin: 0px 30px 0px 30px;">
+                            <i class="fas fa-caret-right fa-3x" style="display: inline-block; color: grey;"></i>
+                            <i class="fas fa-caret-right fa-3x" style="display: inline-block; color: grey;"></i>
+                            <i class="fas fa-caret-right fa-3x" style="display: inline-block; color: grey;"></i>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item" align="center">
+                        <h5><b>CACHE</b></h5>
+                        <span class="redis-icon"></span><br/>
+                        <oj-bind-if test="[[cacheMonitoring_iconCache() === 'success']]">
+                            <span class="oj-icon-circle oj-icon-xxs">
+                              <span class="oj-icon-circle-inner" style="background-color:#81ba5f; margin:10px;">
+                                  <i class="fas fa-check"></i>
+                              </span>
+                            </span>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[cacheMonitoring_iconCache() === 'error']]">
+                            <span class="oj-icon-circle oj-icon-xxs">
+                              <span class="oj-icon-circle-inner" style="background-color:#de2333; margin:10px;">
+                                  <i class="fas fa-times"></i>
+                              </span>
+                            </span>
+                        </oj-bind-if>  
+                        <oj-bind-if test="[[cacheMonitoring_iconCache() === 'wait' || cacheMonitoring_iconCache() === '' || cacheMonitoring_iconCache() === null ]]">
+                            <span class="oj-icon-circle oj-icon-xxs">
+                              <span class="oj-icon-circle-inner" style="background-color:#f6b846; margin:10px;">
+                                  <i class="fas fa-minus"></i>
+                              </span>
+                            </span>
+                        </oj-bind-if>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item"></div>
+                    <div class="oj-flex-item oj-panel oj-panel-alt1" style="min-height:200px; width:550px;margin:20px 50px 20px 50px;">
+                        <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+                            <h4><b>Cache Status: <span data-bind="text:cacheMonitoring_status, css:cacheMonitoring_textColor"></span></b></h4>
+                            <oj-bind-if test="[[cacheMonitoring_status() === 'FAILED']]">
+                                <div style="float:right"><oj-button on-oj-action="[[cacheMonitoring_retry]]" disabled="[[cacheMonitoring_isReadOnly]]">Retry Cache</oj-button></div>
+                                <p>Refresh <oj-button on-oj-action="[[cacheMonitoring_refreshData]]"><i class="fas fa-redo"></i></oj-button> and recheck the latest status before Retry manually. </p>
+                            </oj-bind-if>
+                            <br/>
+                            <h4><b>Details:</b></h4>
+                            <oj-list-view id="listview" data="[[cacheMonitoring_detailsDatasource]]" item.renderer="[[cacheMonitoring_detailsRenderer]]">
+                            </oj-list-view>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

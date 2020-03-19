@@ -1,0 +1,1 @@
+"use strict";define(["ojs/ojcore","ojs/ojeventtarget","ojs/ojdataprovider"],function(e){e.TreeDataProvider=function(){}});

@@ -1,0 +1,1 @@
+import{HALF_PI}from"../constants/values";export default function(a,t){var r=1-(1-a*a)/(2*a)*Math.log((1-a)/(1+a));if(Math.abs(Math.abs(t)-r)<1e-6)return t<0?-1*HALF_PI:HALF_PI;for(var o,h,n,s,M=Math.asin(.5*t),e=0;e<30;e++)if(h=Math.sin(M),n=Math.cos(M),s=a*h,M+=o=Math.pow(1-s*s,2)/(2*n)*(t/(1-a*a)-h/(1-s*s)+.5/a*Math.log((1-s)/(1+s))),Math.abs(o)<=1e-10)return M;return NaN};

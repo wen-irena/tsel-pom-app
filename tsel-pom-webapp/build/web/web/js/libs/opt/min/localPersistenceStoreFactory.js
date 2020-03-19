@@ -1,0 +1,1 @@
+define(["./impl/localPersistenceStore"],function(n){"use strict";return function(){function e(e,t){var r=new n(e);return r.Init(t).then(function(){return r})}return{createPersistenceStore:function(n,t){return e(n,t)}}}()});

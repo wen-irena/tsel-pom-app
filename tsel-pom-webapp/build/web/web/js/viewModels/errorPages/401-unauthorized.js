@@ -1,0 +1,1 @@
+define(["ojs/ojcore","knockout","jquery","common/configService"],function(o,e,n,t){return this.onClickHome=function(){o.Router.rootInstance.go(o.Router.rootInstance.defaultStateId)},function(){this.header="401 - Unauthorized"}});

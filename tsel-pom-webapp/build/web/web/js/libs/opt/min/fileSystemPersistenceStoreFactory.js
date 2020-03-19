@@ -1,0 +1,1 @@
+define(["./impl/fileSystemPersistenceStore"],function(e){"use strict";return function(){function n(n,t){var r=new e(n);return r.Init(t).then(function(){return r})}return{createPersistenceStore:function(e,t){return n(e,t)}}}()});

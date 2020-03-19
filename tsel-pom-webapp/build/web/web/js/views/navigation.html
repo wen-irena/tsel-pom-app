@@ -1,0 +1,12 @@
+<script type="text/html" id="navTemplate">
+    <li style="cursor:pointer">
+        <a data-bind="click: function() {$root.redirect($data.url);}">
+            <oj-bind-text value="[[$data['title']]]"></oj-bind-text>
+        </a>
+    </li>
+</script>
+
+<div id="navlistdemo">
+    <oj-navigation-list data="[[navDataSource]]" edge="start" item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('navTemplate', true)]]" drill-mode="sliding">
+    </oj-navigation-list>
+</div>

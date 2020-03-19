@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<div id="my-special-list-template">
+    <div class="dropBtnBar">
+        
+        <oj-bind-if test="[[showPrint() === true]]">
+            <oj-button id="refresh" on-oj-action='[[printData]]'>Print</oj-button>
+        </oj-bind-if>
+        <oj-bind-if test="[[showExport() === true]]">
+            <oj-button id="refresh" on-oj-action='[[exportxls]]'>Export</oj-button>
+        </oj-bind-if>
+        <oj-bind-if test="[[showColDisp() === true]]">
+            <div class="dropdown">
+                <oj-button class="dropbtn ">Column to Display</oj-button>
+                <div class="dropdown-content">
+                    <div id="colDisplay" data-bind="ojComponent: {component: 'ojCheckboxset', value: columnDisplayed, optionChange: onChangedSelection}">
+                        <!-- ko foreach: columnList -->
+                        <span class="oj-choice-row">
+                            <input type="checkbox" data-bind="value: field" />
+                            <label data-bind="text: label"></label>
+                        </span>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+            </div>
+        </oj-bind-if>
+        <oj-bind-slot name="fetchSizeArea"></oj-bind-slot>
+    </div>
+    <table class="myPrint" data-bind="attr: {id: 'myTable_'+$properties.id}, ojComponent: componentOptions">
+    </table>
+    <oj-bind-if test="[[showPagination() === true]]">
+        <div class="oj-flex">
+            <div class="oj-flex-item">
+                <!--<span>Rows to display: </span>
+                <oj-select-one id="basicSelect" value="{{displaySizeTemp}}" style="max-width:1.3em">
+                    <oj-option value="10">10</oj-option>
+                    <oj-option value="25">25</oj-option>
+                    <oj-option value="25">50</oj-option>
+                </oj-select-one>-->
+                
+            </div>
+            <!-- <oj-paging-control id="paging" data='[[dataSource]]' page-size='[[displaySize]]' slot='bottom'></oj-paging-control> -->
+            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: pageSize,
+            pageOptions: {layout: ['auto', 'input', 'rangeText']}}"></div>
+        </div>
+    </oj-bind-if>
+</div>

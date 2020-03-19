@@ -1,0 +1,1 @@
+define(["ojs/ojcore","text!./view.html","./viewModel","text!./component.json","css!./styles","ojs/ojcomposite"],function(e,t,o,s){e.Composite.register("oc-table",{template:{element:"my-special-list-template"},view:t,viewModel:o,metadata:JSON.parse(s)})});

@@ -1,0 +1,34 @@
+{
+    "data" : [
+        {
+            "AttributeId": "10111",
+            "ItemId" : "0111",
+            "Name" : "1",
+            "Value" : "1",
+            "CreatedDate": "05-AUG-2018 09:00:00",
+            "UpdatedDate": "05-AUG-2018 09:00:00",
+            "CreatedBy": "admin",
+            "UpdatedBy": "admin"
+        },
+        {
+            "AttributeId": "20112",
+            "ItemId" : "0112",
+            "Name" : "1",
+            "Value" : "1",
+            "CreatedDate": "05-AUG-2018 09:00:00",
+            "UpdatedDate": "05-AUG-2018 09:00:00",
+            "CreatedBy": "admin",
+            "UpdatedBy": "admin"
+        },
+        {
+            "AttributeId": "30113",
+            "ItemId" : "0113",
+            "Name" : "1",
+            "Value" : "1",
+            "CreatedDate": "05-AUG-2018 09:00:00",
+            "UpdatedDate": "05-AUG-2018 09:00:00",
+            "CreatedBy": "admin",
+            "UpdatedBy": "admin"
+        }
+    ]
+}

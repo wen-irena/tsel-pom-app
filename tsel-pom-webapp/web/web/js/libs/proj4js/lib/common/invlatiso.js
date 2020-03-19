@@ -1,0 +1,1 @@
+import fL from"./fL";export default function(t,a){var f=fL(1,a),e=0,o=0;do{e=f,o=t*Math.sin(e),f=fL(Math.exp(t*Math.log((1+o)/(1-o))/2),a)}while(Math.abs(f-e)>1e-12);return f};

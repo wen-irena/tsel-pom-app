@@ -1,0 +1,1 @@
+import{TWO_PI,SPI}from"../constants/values";import sign from"./sign";export default function(t){return Math.abs(t)<=SPI?t:t-sign(t)*TWO_PI};

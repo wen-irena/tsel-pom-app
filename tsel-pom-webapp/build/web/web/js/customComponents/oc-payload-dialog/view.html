@@ -1,0 +1,30 @@
+<oj-button on-oj-action='[[onOpenPayloadDialog]]' disabled="false"  data-bind="attr: {id: 'openPayloadDlgBtn_'+$properties.id}, title:$properties.buttonName">
+    <i class="fas fa-code"></i>
+</oj-button>
+
+<oj-dialog style="display:none;width:60%;height:80vh;" data-bind="attr: {id: 'dlgPayloadModal_'+$properties.id , title: $properties.buttonName }">
+    <div class="oj-dialog-body">
+        <div class="oj-form-layout">
+            <div class="oj-form oj-sm-odd-cols-6 oj-md-odd-cols-6 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item div-ori" style="display:none;">
+                        <div style="width:95%;margin:0 2.5%;">
+                                <oj-label for="oriPayloadEditor">Original Payload</oj-label>
+                            <textarea rows="20" id="oriPayloadEditor" name="oriPayloadEditor" data-bind="text:$properties.originalPayload"></textarea>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item" >
+
+                        <div style="width:95%;margin:0 2.5%;">
+                                <oj-label for="editedPayloadEditor">Edited Payload</oj-label>
+                            <textarea rows="20" id="editedPayloadEditor" name="editedPayloadEditor" data-bind="text:$properties.updatePayload"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pull-right retry-action" style="display:none;">
+            <oj-button id="saveBtn" on-oj-action="[[onClickSavePayload]]">Retry</oj-button>
+        </div>
+    </div>
+</oj-dialog>

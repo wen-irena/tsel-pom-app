@@ -1,0 +1,40 @@
+{
+    "data" : [
+        {
+            "WorkOrderId" : "011",
+            "OrderId": "01",
+            "Sequence" : "1",
+            "Destination": "FOSS1",
+            "Status": "Completed",
+            "CreatedDate": "05-AUG-2018 09:00:00",
+            "UpdatedDate": "05-AUG-2018 09:00:00",
+            "CompletedDate": "05-AUG-2018 09:00:00",
+            "ReqTime": "05-AUG-2018 09:00:00",
+            "ResTime": "05-AUG-2018 09:00:00"
+        },
+        {
+            "WorkOrderId" : "012",
+            "OrderId": "20",
+            "Sequence" : "2",
+            "Destination": "FOSS2",
+            "Status": "Completed",
+            "CreatedDate": "05-AUG-2018 09:00:00",
+            "UpdatedDate": "05-AUG-2018 09:00:00",
+            "CompletedDate": "05-AUG-2018 09:00:00",
+            "ReqTime": "05-AUG-2018 09:00:00",
+            "ResTime": "05-AUG-2018 09:00:00"
+        },
+        {
+            "WorkOrderId" : "013",
+            "OrderId": "30",
+            "Sequence" : "1",
+            "Destination": "FOSS2",
+            "Status": "Completed",
+            "CreatedDate": "05-AUG-2018 09:00:00",
+            "UpdatedDate": "05-AUG-2018 09:00:00",
+            "CompletedDate": "05-AUG-2018 09:00:00",
+            "ReqTime": "05-AUG-2018 09:00:00",
+            "ResTime": "05-AUG-2018 09:00:00"
+        }
+    ]
+}

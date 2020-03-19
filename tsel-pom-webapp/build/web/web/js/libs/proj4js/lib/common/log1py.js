@@ -1,0 +1,1 @@
+export default function(t){var r=1+t,a=r-1;return 0===a?t:t*Math.log(r)/a};
